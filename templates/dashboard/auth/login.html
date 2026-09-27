@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-950">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Login - NSUK ODeL Dashboard</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#0092dc',
+                            navy: '#0b192c',
+                            green: '#85c226',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="h-full flex items-center justify-center p-4 bg-gradient-to-br from-slate-950 via-slate-900 to-brand-navy font-sans antialiased text-slate-100">
+
+    <div class="w-full max-w-md space-y-8 bg-slate-900/90 backdrop-blur-xl p-8 sm:p-10 rounded-3xl border border-slate-800 shadow-2xl">
+        
+        <!-- Header & Logo -->
+        <div class="text-center space-y-3">
+            <div class="w-16 h-16 rounded-2xl bg-white p-2 mx-auto shadow-lg flex items-center justify-center">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/52/Nasarawa_State_University_logo.png/220px-Nasarawa_State_University_logo.png" alt="NSUK Crest" class="w-full h-full object-contain">
+            </div>
+            <div>
+                <h1 class="font-heading font-extrabold text-2xl text-white tracking-tight">NSUK <span class="text-brand-green">ODeL</span></h1>
+                <p class="text-xs text-slate-400 mt-0.5">Directorate Management Dashboard Login</p>
+            </div>
+        </div>
+
+        <!-- Messages -->
+        {% if messages %}
+        <div class="space-y-2">
+            {% for message in messages %}
+            <div class="p-3.5 rounded-xl text-xs font-medium flex items-center gap-2 {% if message.tags == 'error' %}bg-rose-950/80 border border-rose-800 text-rose-200{% else %}bg-sky-950/80 border border-sky-800 text-sky-200{% endif %}">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span>{{ message }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Form -->
+        <form method="post" class="space-y-5">
+            {% csrf_token %}
+            
+            <div class="space-y-1.5">
+                <label class="block text-xs font-bold text-slate-300">Username</label>
+                <div class="relative">
+                    <i class="fa-solid fa-user absolute left-4 top-3.5 text-slate-400 text-sm"></i>
+                    <input type="text" name="username" required autofocus placeholder="Admin username" class="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-xs sm:text-sm focus:border-brand-blue focus:ring-2 focus:ring-sky-500/20 outline-none transition">
+                </div>
+            </div>
+
+            <div class="space-y-1.5">
+                <label class="block text-xs font-bold text-slate-300">Password</label>
+                <div class="relative">
+                    <i class="fa-solid fa-lock absolute left-4 top-3.5 text-slate-400 text-sm"></i>
+                    <input type="password" name="password" required placeholder="••••••••••••" class="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-xs sm:text-sm focus:border-brand-blue focus:ring-2 focus:ring-sky-500/20 outline-none transition">
+                </div>
+            </div>
+
+            <button type="submit" class="w-full py-3.5 px-4 rounded-xl bg-brand-blue hover:bg-brand-darkblue text-white font-extrabold text-sm shadow-lg shadow-sky-900/40 transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-shield-halved"></i> Authenticate & Login
+            </button>
+        </form>
+
+        <div class="text-center pt-4 border-t border-slate-800 text-xs text-slate-500">
+            <a href="{% url 'home' %}" class="hover:text-sky-400 transition flex items-center justify-center gap-1">
+                <i class="fa-solid fa-arrow-left text-[10px]"></i> Return to public website
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>

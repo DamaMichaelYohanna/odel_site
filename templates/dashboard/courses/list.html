@@ -1,0 +1,76 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Manage Courses - NSUK ODeL Dashboard{% endblock %}
+{% block header_title %}Courses Catalog ({{ total_count }}){% endblock %}
+
+{% block content %}
+<div class="space-y-6 max-w-7xl mx-auto">
+    
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+            <h2 class="font-heading font-extrabold text-2xl text-white">Course Modules</h2>
+            <p class="text-xs text-slate-400">Add, edit, or link e-learning courses to LMS Moodle.</p>
+        </div>
+        <a href="{% url 'dashboard_course_create' %}" class="px-4 py-2.5 rounded-xl bg-brand-green hover:bg-brand-darkgreen text-xs font-bold text-white shadow transition flex items-center gap-1.5">
+            <i class="fa-solid fa-plus"></i> Add New Course
+        </a>
+    </div>
+
+    <!-- Search / Filter -->
+    <div class="bg-slate-800/80 rounded-3xl p-5 border border-slate-700 shadow-md">
+        <form method="get" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="sm:col-span-2 relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-sm"></i>
+                <input type="text" name="q" value="{{ query }}" placeholder="Search course code or title (e.g. PAD111)..." class="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 text-xs focus:border-brand-blue outline-none">
+            </div>
+            <div class="flex items-center gap-2">
+                <select name="level" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:border-brand-blue outline-none">
+                    <option value="">All Levels</option>
+                    <option value="100" {% if selected_level == '100' %}selected{% endif %}>100 Level</option>
+                    <option value="200" {% if selected_level == '200' %}selected{% endif %}>200 Level</option>
+                    <option value="300" {% if selected_level == '300' %}selected{% endif %}>300 Level</option>
+                    <option value="400" {% if selected_level == '400' %}selected{% endif %}>400 Level</option>
+                </select>
+                <button type="submit" class="px-4 py-2 rounded-xl bg-brand-blue hover:bg-brand-darkblue text-white font-bold text-xs">Filter</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Table -->
+    <div class="bg-slate-800/80 rounded-3xl border border-slate-700 shadow-md overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+                <thead class="bg-slate-900/80 text-slate-400 uppercase tracking-wider text-[10px] border-b border-slate-700">
+                    <tr>
+                        <th class="py-4 px-6">Code</th>
+                        <th class="py-4 px-6">Course Title</th>
+                        <th class="py-4 px-6">Program</th>
+                        <th class="py-4 px-6 text-center">Level & Sem.</th>
+                        <th class="py-4 px-6 text-center">Units</th>
+                        <th class="py-4 px-6 text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-700/50 font-medium">
+                    {% for c in page_obj %}
+                    <tr class="hover:bg-slate-750/30 transition">
+                        <td class="py-4 px-6 font-mono font-bold text-sky-400">{{ c.course_code }}</td>
+                        <td class="py-4 px-6 font-bold text-white">{{ c.title }}</td>
+                        <td class="py-4 px-6 text-slate-400">{{ c.program.name|default:"General" }}</td>
+                        <td class="py-4 px-6 text-center">
+                            <span class="px-2 py-0.5 rounded bg-slate-900 text-slate-200 text-[10px] font-bold">{{ c.level }}L ({{ c.semester }})</span>
+                        </td>
+                        <td class="py-4 px-6 text-center font-bold text-brand-green">{{ c.credit_units }}</td>
+                        <td class="py-4 px-6 text-right space-x-2">
+                            <a href="{% url 'dashboard_course_edit' pk=c.pk %}" class="text-slate-400 hover:text-sky-400"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="{% url 'dashboard_course_delete' pk=c.pk %}" class="text-slate-400 hover:text-rose-400"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="6" class="py-8 text-center text-slate-500">No courses match query.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Nasarawa State University, Keffi - Open Distance and e-Learning (ODeL){% endblock %}</title>
+    
+    <!-- Meta & SEO -->
+    <meta name="description" content="{% block meta_description %}Nasarawa State University, Keffi (NSUK) Directorate of Open, Distance and e-Learning. Study accredited Bachelor of Science degree programs flexibly online.{% endblock %}">
+    <meta name="keywords" content="NSUK ODeL, Open Distance Learning, Nasarawa State University Keffi, Online Degree, Distance Learning Nigeria, B.Sc Public Administration">
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/thumb/5/52/Nasarawa_State_University_logo.png/220px-Nasarawa_State_University_logo.png">
+
+    <!-- Google Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN with configuration -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#0092dc',
+                            darkblue: '#006fa8',
+                            navy: '#0b192c',
+                            green: '#85c226',
+                            darkgreen: '#659918',
+                            gold: '#fbbf24',
+                            surface: '#f8fafc',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+
+    <style>
+        [x-cloak] { display: none !important; }
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(11, 25, 44, 0.92) 0%, rgba(0, 146, 220, 0.82) 100%);
+        }
+        .nsuk-glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .text-glow {
+            text-shadow: 0 2px 10px rgba(0, 146, 220, 0.3);
+        }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-blue selection:text-white flex flex-col min-h-screen" x-data="{ mobileMenuOpen: false, searchModalOpen: false, admissionModalOpen: false }">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-brand-darkgreen via-brand-green to-brand-green text-white text-xs sm:text-sm font-medium py-2 px-4 shadow-sm border-b border-lime-600/30">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+            <div class="flex items-center space-x-2 text-center sm:text-left">
+                <span class="bg-white/20 text-white uppercase text-[10px] font-bold px-2 py-0.5 rounded-full tracking-wider animate-pulse">Notice</span>
+                <span class="truncate max-w-md md:max-w-2xl">{{ site_settings.top_announcement }}</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="hidden md:flex items-center space-x-3 text-xs">
+                    <a href="tel:{{ site_settings.contact_phone_1 }}" class="hover:text-amber-200 transition-colors flex items-center gap-1">
+                        <i class="fa-solid fa-phone"></i> {{ site_settings.contact_phone_1 }}
+                    </a>
+                    <span>|</span>
+                    <a href="mailto:{{ site_settings.contact_email }}" class="hover:text-amber-200 transition-colors flex items-center gap-1">
+                        <i class="fa-solid fa-envelope"></i> {{ site_settings.contact_email }}
+                    </a>
+                </div>
+                <!-- Socials -->
+                <div class="flex items-center space-x-2">
+                    {% if site_settings.twitter_x_url %}
+                    <a href="{{ site_settings.twitter_x_url }}" target="_blank" rel="noopener" class="w-6 h-6 rounded-full bg-white/10 hover:bg-white/30 flex items-center justify-center transition"><i class="fa-brands fa-x-twitter text-xs"></i></a>
+                    {% endif %}
+                    {% if site_settings.facebook_url %}
+                    <a href="{{ site_settings.facebook_url }}" target="_blank" rel="noopener" class="w-6 h-6 rounded-full bg-white/10 hover:bg-white/30 flex items-center justify-center transition"><i class="fa-brands fa-facebook-f text-xs"></i></a>
+                    {% endif %}
+                    {% if site_settings.instagram_url %}
+                    <a href="{{ site_settings.instagram_url }}" target="_blank" rel="noopener" class="w-6 h-6 rounded-full bg-white/10 hover:bg-white/30 flex items-center justify-center transition"><i class="fa-brands fa-instagram text-xs"></i></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="sticky top-0 z-40 bg-brand-blue text-white shadow-lg transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo & Brand Title -->
+                <a href="{% url 'home' %}" class="flex items-center space-x-3 group">
+                    <div class="w-12 h-12 rounded-xl bg-white p-1.5 shadow-md flex items-center justify-center transition-transform group-hover:scale-105">
+                        <!-- NSUK Crest -->
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/52/Nasarawa_State_University_logo.png/220px-Nasarawa_State_University_logo.png" alt="NSUK Logo" class="w-full h-full object-contain">
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-heading font-extrabold text-lg sm:text-xl tracking-tight leading-none text-white drop-shadow">
+                            NSUK <span class="text-amber-300">ODeL</span>
+                        </span>
+                        <span class="text-[11px] sm:text-xs text-sky-100 font-medium tracking-wide">
+                            Open Distance & e-Learning Centre
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden lg:flex items-center space-x-1 font-medium text-sm">
+                    <a href="{% url 'home' %}" class="px-3.5 py-2 rounded-lg hover:bg-white/15 transition-all text-white font-semibold">
+                        Home
+                    </a>
+
+                    <!-- About Us Dropdown -->
+                    <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                        <button class="px-3.5 py-2 rounded-lg hover:bg-white/15 transition-all flex items-center space-x-1.5 focus:outline-none">
+                            <span>About Us</span>
+                            <i class="fa-solid fa-chevron-down text-[10px] transition-transform" :class="{ 'rotate-180': open }"></i>
+                        </button>
+                        <div x-show="open" x-cloak 
+                             x-transition:enter="transition ease-out duration-150"
+                             x-transition:enter-start="opacity-0 translate-y-2"
+                             x-transition:enter-end="opacity-100 translate-y-0"
+                             x-transition:leave="transition ease-in duration-100"
+                             x-transition:leave-start="opacity-100 translate-y-0"
+                             x-transition:leave-end="opacity-0 translate-y-2"
+                             class="absolute left-0 mt-1 w-60 rounded-xl bg-white shadow-2xl py-2 text-slate-800 border border-slate-100 z-50">
+                            <a href="{% url 'history' %}" class="block px-4 py-2.5 text-sm hover:bg-sky-50 hover:text-brand-blue transition font-medium">
+                                <i class="fa-solid fa-landmark mr-2 text-brand-green"></i> ODeL History
+                            </a>
+                            <a href="{% url 'vc_message' %}" class="block px-4 py-2.5 text-sm hover:bg-sky-50 hover:text-brand-blue transition font-medium">
+                                <i class="fa-solid fa-quote-left mr-2 text-brand-green"></i> Vice-Chancellor's Message
+                            </a>
+                            <a href="{% url 'director_message' %}" class="block px-4 py-2.5 text-sm hover:bg-sky-50 hover:text-brand-blue transition font-medium">
+                                <i class="fa-solid fa-user-tie mr-2 text-brand-green"></i> Director's Message
+                            </a>
+                            <a href="{% url 'staff_directory' %}" class="block px-4 py-2.5 text-sm hover:bg-sky-50 hover:text-brand-blue transition font-medium">
+                                <i class="fa-solid fa-users mr-2 text-brand-green"></i> Our Staff & Directorate
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Programs Dropdown -->
+                    <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                        <button class="px-3.5 py-2 rounded-lg hover:bg-white/15 transition-all flex items-center space-x-1.5 focus:outline-none">
+                            <span>Programs</span>
+                            <i class="fa-solid fa-chevron-down text-[10px] transition-transform" :class="{ 'rotate-180': open }"></i>
+                        </button>
+                        <div x-show="open" x-cloak 
+                             x-transition:enter="transition ease-out duration-150"
+                             x-transition:enter-start="opacity-0 translate-y-2"
+                             x-transition:enter-end="opacity-100 translate-y-0"
+                             x-transition:leave="transition ease-in duration-100"
+                             x-transition:leave-start="opacity-100 translate-y-0"
+                             x-transition:leave-end="opacity-0 translate-y-2"
+                             class="absolute left-0 mt-1 w-64 rounded-xl bg-white shadow-2xl py-2 text-slate-800 border border-slate-100 z-50">
+                            <div class="px-4 py-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Pioneer Program</div>
+                            <a href="{% url 'program_detail' slug='b-sc-public-administration' %}" class="block px-4 py-2 text-sm hover:bg-sky-50 hover:text-brand-blue transition font-semibold text-brand-darkblue">
+                                <i class="fa-solid fa-graduation-cap mr-2 text-brand-blue"></i> B.Sc Public Administration
+                            </a>
+                            <div class="border-t border-slate-100 my-1"></div>
+                            <a href="{% url 'programs_list' %}" class="block px-4 py-2 text-sm hover:bg-sky-50 hover:text-brand-blue transition font-medium">
+                                <i class="fa-solid fa-layer-group mr-2 text-brand-green"></i> View All Programs
+                            </a>
+                            <a href="{% url 'courses_list' %}" class="block px-4 py-2 text-sm hover:bg-sky-50 hover:text-brand-blue transition font-medium">
+                                <i class="fa-solid fa-book-open mr-2 text-brand-green"></i> Browse Course Catalog
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Admission List -->
+                    <a href="{% url 'admission_list' %}" class="px-3.5 py-2 rounded-lg hover:bg-white/15 transition-all text-white relative">
+                        <span>Admission List</span>
+                        <span class="inline-flex items-center ml-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-400 text-slate-900 leading-none">New</span>
+                    </a>
+
+                    <!-- News & Events -->
+                    <a href="{% url 'news_list' %}" class="px-3.5 py-2 rounded-lg hover:bg-white/15 transition-all text-white">
+                        Events & News
+                    </a>
+
+                    <!-- Contact Us -->
+                    <a href="{% url 'contact' %}" class="px-3.5 py-2 rounded-lg hover:bg-white/15 transition-all text-white">
+                        Contact Us
+                    </a>
+
+                    <!-- Portal Dropdown -->
+                    <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                        <button class="px-3.5 py-2 rounded-lg bg-white/15 hover:bg-white/25 transition-all flex items-center space-x-1.5 focus:outline-none font-semibold text-amber-200">
+                            <i class="fa-solid fa-globe mr-1"></i>
+                            <span>Portals</span>
+                            <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                        </button>
+                        <div x-show="open" x-cloak 
+                             x-transition:enter="transition ease-out duration-150"
+                             x-transition:enter-start="opacity-0 translate-y-2"
+                             x-transition:enter-end="opacity-100 translate-y-0"
+                             class="absolute right-0 mt-1 w-64 rounded-xl bg-white shadow-2xl py-2 text-slate-800 border border-slate-100 z-50">
+                            <a href="{{ site_settings.student_portal_url }}" target="_blank" rel="noopener" class="flex items-center justify-between px-4 py-2.5 text-sm hover:bg-sky-50 hover:text-brand-blue transition font-medium">
+                                <span class="flex items-center"><i class="fa-solid fa-id-card mr-2.5 text-brand-blue"></i> Student Portal</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400"></i>
+                            </a>
+                            <a href="{{ site_settings.application_portal_url }}" target="_blank" rel="noopener" class="flex items-center justify-between px-4 py-2.5 text-sm hover:bg-sky-50 hover:text-brand-blue transition font-medium">
+                                <span class="flex items-center"><i class="fa-solid fa-file-pen mr-2.5 text-brand-green"></i> Application Portal</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400"></i>
+                            </a>
+                            <a href="{{ site_settings.pgd_application_url }}" target="_blank" rel="noopener" class="flex items-center justify-between px-4 py-2.5 text-sm hover:bg-sky-50 hover:text-brand-blue transition font-medium">
+                                <span class="flex items-center"><i class="fa-solid fa-user-graduate mr-2.5 text-amber-500"></i> ODeL PGD Portal</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400"></i>
+                            </a>
+                            <a href="{{ site_settings.lms_portal_url }}" target="_blank" rel="noopener" class="flex items-center justify-between px-4 py-2.5 text-sm hover:bg-sky-50 hover:text-brand-blue transition font-medium">
+                                <span class="flex items-center"><i class="fa-solid fa-laptop-code mr-2.5 text-purple-500"></i> LMS (E-Learning)</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400"></i>
+                            </a>
+                            <div class="border-t border-slate-100 my-1"></div>
+                            <a href="{% url 'dashboard_login' %}" class="flex items-center justify-between px-4 py-2 text-xs text-slate-500 hover:bg-slate-100 transition">
+                                <span><i class="fa-solid fa-shield-halved mr-1.5 text-slate-400"></i> Admin Staff Login</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- FAQ -->
+                    <a href="{% url 'faq' %}" class="px-3.5 py-2 rounded-lg hover:bg-white/15 transition-all text-white">
+                        FAQ
+                    </a>
+                </nav>
+
+                <!-- Action Button & Mobile Toggle -->
+                <div class="flex items-center space-x-3">
+                    <a href="{% url 'how_to_apply' %}" class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-xl text-sm font-bold bg-brand-green hover:bg-brand-darkgreen text-white shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-paper-plane mr-2"></i> Apply Now
+                    </a>
+
+                    <!-- Mobile Menu Button -->
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="lg:hidden p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white focus:outline-none transition">
+                        <i class="fa-solid fa-bars text-xl" x-show="!mobileMenuOpen"></i>
+                        <i class="fa-solid fa-xmark text-xl" x-show="mobileMenuOpen" x-cloak></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div x-show="mobileMenuOpen" x-cloak 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-4"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             class="lg:hidden bg-brand-navy border-t border-sky-800/50 px-4 pt-3 pb-6 space-y-2 text-white shadow-2xl">
+            <a href="{% url 'home' %}" class="block px-3 py-2 rounded-lg hover:bg-white/10 font-medium">Home</a>
+            <div class="border-t border-white/10 pt-2 pb-1 text-xs font-bold text-slate-400 uppercase tracking-wider px-3">About Directorate</div>
+            <a href="{% url 'history' %}" class="block px-3 py-1.5 text-sm text-slate-200 hover:text-white">ODeL History</a>
+            <a href="{% url 'vc_message' %}" class="block px-3 py-1.5 text-sm text-slate-200 hover:text-white">Vice Chancellor's Message</a>
+            <a href="{% url 'director_message' %}" class="block px-3 py-1.5 text-sm text-slate-200 hover:text-white">Director's Message</a>
+            <a href="{% url 'staff_directory' %}" class="block px-3 py-1.5 text-sm text-slate-200 hover:text-white">Our Staff & Facilitators</a>
+            
+            <div class="border-t border-white/10 pt-2 pb-1 text-xs font-bold text-slate-400 uppercase tracking-wider px-3">Academic</div>
+            <a href="{% url 'programs_list' %}" class="block px-3 py-1.5 text-sm text-slate-200 hover:text-white">All Degree Programs</a>
+            <a href="{% url 'program_detail' slug='b-sc-public-administration' %}" class="block px-3 py-1.5 text-sm text-slate-200 hover:text-white">B.Sc Public Administration</a>
+            <a href="{% url 'courses_list' %}" class="block px-3 py-1.5 text-sm text-slate-200 hover:text-white">Course Catalog</a>
+            <a href="{% url 'admission_list' %}" class="block px-3 py-2 rounded-lg bg-brand-green/20 text-brand-green font-bold">Check Admission List</a>
+            
+            <div class="border-t border-white/10 pt-2 pb-1 text-xs font-bold text-slate-400 uppercase tracking-wider px-3">External Portals</div>
+            <a href="{{ site_settings.student_portal_url }}" target="_blank" class="block px-3 py-1.5 text-sm text-amber-300">Student Portal</a>
+            <a href="{{ site_settings.application_portal_url }}" target="_blank" class="block px-3 py-1.5 text-sm text-amber-300">Application Portal</a>
+            <a href="{{ site_settings.lms_portal_url }}" target="_blank" class="block px-3 py-1.5 text-sm text-amber-300">LMS (Moodle) Portal</a>
+            <a href="{% url 'faq' %}" class="block px-3 py-2 rounded-lg hover:bg-white/10 font-medium">FAQ</a>
+            <a href="{% url 'contact' %}" class="block px-3 py-2 rounded-lg hover:bg-white/10 font-medium">Contact Us</a>
+            
+            <div class="pt-3">
+                <a href="{% url 'how_to_apply' %}" class="w-full text-center block px-4 py-3 rounded-xl bg-brand-green hover:bg-brand-darkgreen font-bold text-white shadow-lg">
+                    Start Application Now
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Global Toast Notifications -->
+    {% if messages %}
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+        {% for message in messages %}
+        <div class="p-4 rounded-xl mb-3 shadow-md flex items-center justify-between {% if message.tags == 'error' %}bg-rose-50 border border-rose-200 text-rose-800{% elif message.tags == 'success' %}bg-emerald-50 border border-emerald-200 text-emerald-800{% else %}bg-sky-50 border border-sky-200 text-sky-800{% endif %}" role="alert">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid {% if message.tags == 'error' %}fa-triangle-exclamation text-rose-500{% elif message.tags == 'success' %}fa-circle-check text-emerald-500{% else %}fa-circle-info text-sky-500{% endif %} text-lg"></i>
+                <span class="text-sm font-medium">{{ message }}</span>
+            </div>
+            <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-slate-600">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Page Body -->
+    <main class="flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-navy text-slate-300 pt-16 pb-8 border-t-4 border-brand-green">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
+                
+                <!-- Col 1: Brand & Bio -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 rounded-xl bg-white p-1.5 shadow-md flex items-center justify-center">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/52/Nasarawa_State_University_logo.png/220px-Nasarawa_State_University_logo.png" alt="NSUK Crest" class="w-full h-full object-contain">
+                        </div>
+                        <div>
+                            <h3 class="font-heading font-extrabold text-lg text-white leading-tight">NSUK ODeL</h3>
+                            <p class="text-xs text-brand-green font-semibold">Knowledge for Development</p>
+                        </div>
+                    </div>
+                    <p class="text-xs leading-relaxed text-slate-400 text-justify">
+                        The Directorate of Open, Distance and e-Learning (ODeL) at Nasarawa State University, Keffi offers flexible, accessible, high-quality, and NUC-accredited tertiary education for learners everywhere.
+                    </p>
+                    <div class="flex items-center space-x-3 pt-2">
+                        {% if site_settings.twitter_x_url %}
+                        <a href="{{ site_settings.twitter_x_url }}" target="_blank" class="w-9 h-9 rounded-lg bg-slate-800 hover:bg-brand-blue flex items-center justify-center text-white transition"><i class="fa-brands fa-x-twitter"></i></a>
+                        {% endif %}
+                        {% if site_settings.facebook_url %}
+                        <a href="{{ site_settings.facebook_url }}" target="_blank" class="w-9 h-9 rounded-lg bg-slate-800 hover:bg-blue-600 flex items-center justify-center text-white transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        {% endif %}
+                        {% if site_settings.instagram_url %}
+                        <a href="{{ site_settings.instagram_url }}" target="_blank" class="w-9 h-9 rounded-lg bg-slate-800 hover:bg-pink-600 flex items-center justify-center text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                        {% endif %}
+                        <a href="https://wa.me/{{ site_settings.whatsapp_number }}" target="_blank" class="w-9 h-9 rounded-lg bg-slate-800 hover:bg-emerald-600 flex items-center justify-center text-white transition"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Quick Links -->
+                <div>
+                    <h4 class="font-heading font-bold text-white text-base mb-4 relative inline-block">
+                        Quick Navigation
+                        <span class="absolute bottom-0 left-0 w-8 h-0.5 bg-brand-green -mb-1"></span>
+                    </h4>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="{% url 'home' %}" class="hover:text-amber-300 transition flex items-center gap-2"><i class="fa-solid fa-angle-right text-[10px] text-brand-green"></i> Home</a></li>
+                        <li><a href="{% url 'history' %}" class="hover:text-amber-300 transition flex items-center gap-2"><i class="fa-solid fa-angle-right text-[10px] text-brand-green"></i> ODeL History & Mandate</a></li>
+                        <li><a href="{% url 'vc_message' %}" class="hover:text-amber-300 transition flex items-center gap-2"><i class="fa-solid fa-angle-right text-[10px] text-brand-green"></i> Vice-Chancellor's Message</a></li>
+                        <li><a href="{% url 'director_message' %}" class="hover:text-amber-300 transition flex items-center gap-2"><i class="fa-solid fa-angle-right text-[10px] text-brand-green"></i> Director's Welcome</a></li>
+                        <li><a href="{% url 'staff_directory' %}" class="hover:text-amber-300 transition flex items-center gap-2"><i class="fa-solid fa-angle-right text-[10px] text-brand-green"></i> Faculty & Staff Directory</a></li>
+                        <li><a href="{% url 'faq' %}" class="hover:text-amber-300 transition flex items-center gap-2"><i class="fa-solid fa-angle-right text-[10px] text-brand-green"></i> Frequently Asked Questions</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Academic Programs & Portals -->
+                <div>
+                    <h4 class="font-heading font-bold text-white text-base mb-4 relative inline-block">
+                        Portals & Admissions
+                        <span class="absolute bottom-0 left-0 w-8 h-0.5 bg-brand-green -mb-1"></span>
+                    </h4>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="{% url 'admission_list' %}" class="hover:text-amber-300 transition flex items-center gap-2 font-bold text-brand-green"><i class="fa-solid fa-angle-right text-[10px]"></i> Check Admission List</a></li>
+                        <li><a href="{% url 'program_detail' slug='b-sc-public-administration' %}" class="hover:text-amber-300 transition flex items-center gap-2"><i class="fa-solid fa-angle-right text-[10px] text-brand-green"></i> B.Sc Public Administration</a></li>
+                        <li><a href="{% url 'courses_list' %}" class="hover:text-amber-300 transition flex items-center gap-2"><i class="fa-solid fa-angle-right text-[10px] text-brand-green"></i> Course Directory & Outlines</a></li>
+                        <li><a href="{{ site_settings.student_portal_url }}" target="_blank" class="hover:text-amber-300 transition flex items-center gap-2"><i class="fa-solid fa-angle-right text-[10px] text-brand-green"></i> Student Portal Login</a></li>
+                        <li><a href="{{ site_settings.application_portal_url }}" target="_blank" class="hover:text-amber-300 transition flex items-center gap-2"><i class="fa-solid fa-angle-right text-[10px] text-brand-green"></i> Undergraduate Application</a></li>
+                        <li><a href="{{ site_settings.lms_portal_url }}" target="_blank" class="hover:text-amber-300 transition flex items-center gap-2"><i class="fa-solid fa-angle-right text-[10px] text-brand-green"></i> LMS Moodle Learning Portal</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Contact & Helpdesk -->
+                <div>
+                    <h4 class="font-heading font-bold text-white text-base mb-4 relative inline-block">
+                        Directorate Contact
+                        <span class="absolute bottom-0 left-0 w-8 h-0.5 bg-brand-green -mb-1"></span>
+                    </h4>
+                    <ul class="space-y-3 text-xs text-slate-300">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-location-dot text-brand-green mt-1"></i>
+                            <span>{{ site_settings.address }}</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-phone text-brand-green"></i>
+                            <a href="tel:{{ site_settings.contact_phone_1 }}" class="hover:text-white transition">{{ site_settings.contact_phone_1 }}</a>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-brands fa-whatsapp text-emerald-400"></i>
+                            <a href="https://wa.me/{{ site_settings.whatsapp_number }}" target="_blank" class="hover:text-emerald-400 transition font-medium">+{{ site_settings.whatsapp_number }} (WhatsApp Support)</a>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-envelope text-brand-green"></i>
+                            <a href="mailto:{{ site_settings.contact_email }}" class="hover:text-white transition">{{ site_settings.contact_email }}</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright & Admin link -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+                <p>&copy; {% now "Y" %} Nasarawa State University, Keffi (NSUK). All Rights Reserved.</p>
+                <div class="flex items-center space-x-4">
+                    <a href="{% url 'how_to_apply' %}" class="hover:text-slate-400 transition">Admissions</a>
+                    <span>•</span>
+                    <a href="{% url 'faq' %}" class="hover:text-slate-400 transition">Help & FAQs</a>
+                    <span>•</span>
+                    <a href="{% url 'dashboard_login' %}" class="hover:text-amber-300 text-slate-400 transition font-medium flex items-center gap-1">
+                        <i class="fa-solid fa-lock text-[10px]"></i> Staff Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Support Widget (Direct WhatsApp chat with prefilled message) -->
+    <div class="fixed bottom-6 right-6 z-50 flex items-center group" x-data="{ chatOpen: false }">
+        <a href="https://wa.me/{{ site_settings.whatsapp_number }}?text=Hello%20NSUK%20ODeL%20Support,%20I%20would%20like%20to%20inquire%20about%20your%20distance%20learning%20programs%20and%20admissions." 
+           target="_blank" 
+           rel="noopener" 
+           class="flex items-center space-x-2 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-3 rounded-full shadow-2xl transition-all duration-300 transform group-hover:scale-105">
+            <i class="fa-brands fa-whatsapp text-2xl animate-bounce"></i>
+            <span class="hidden md:inline font-bold text-sm">Chat With ODeL</span>
+        </a>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

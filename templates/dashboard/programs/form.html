@@ -1,0 +1,122 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}{{ title }} - NSUK ODeL Dashboard{% endblock %}
+{% block header_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto py-6">
+    <div class="bg-slate-800/90 rounded-3xl p-8 border border-slate-700 shadow-xl space-y-6">
+        
+        <div class="border-b border-slate-700 pb-4 flex items-center justify-between">
+            <div>
+                <h2 class="font-heading font-bold text-xl text-white">{{ title }}</h2>
+                <p class="text-xs text-slate-400">Configure degree program information, requirements, and media</p>
+            </div>
+            <a href="{% url 'dashboard_programs' %}" class="text-xs text-slate-400 hover:text-white">&laquo; Back to Programs</a>
+        </div>
+
+        <form method="post" enctype="multipart/form-data" class="space-y-5">
+            {% csrf_token %}
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Program Name <span class="text-rose-400">*</span></label>
+                    {{ form.name }}
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">URL Slug (Optional)</label>
+                    {{ form.slug }}
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Degree Type</label>
+                    {{ form.degree_type }}
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Faculty</label>
+                    {{ form.faculty }}
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Status</label>
+                    {{ form.status }}
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Department</label>
+                    {{ form.department }}
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Duration (e.g. 2 - 4 Years)</label>
+                    {{ form.duration }}
+                </div>
+            </div>
+
+            <div class="space-y-1">
+                <label class="block text-xs font-bold text-slate-300">Short Summary Description</label>
+                {{ form.short_description }}
+            </div>
+
+            <div class="space-y-1">
+                <label class="block text-xs font-bold text-slate-300">Full Program Overview</label>
+                {{ form.full_overview }}
+            </div>
+
+            <div class="border-t border-slate-700/80 pt-4 space-y-4">
+                <h3 class="font-heading font-bold text-sm text-brand-green uppercase tracking-wider">Admission Requirements</h3>
+                
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">100 Level (UTME Requirements)</label>
+                    {{ form.utme_requirements }}
+                </div>
+
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">200 Level (Direct Entry Requirements)</label>
+                    {{ form.direct_entry_requirements }}
+                </div>
+
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">300 Level (HND/Degree Conversion Requirements)</label>
+                    {{ form.conversion_requirements }}
+                </div>
+
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Career Opportunities & Job Prospects</label>
+                    {{ form.career_opportunities }}
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Upload Featured Image</label>
+                    {{ form.featured_image }}
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Image URL Fallback</label>
+                    {{ form.featured_image_url }}
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-6 p-4 rounded-2xl bg-slate-900/60 border border-slate-700/60">
+                <label class="flex items-center space-x-2 text-xs font-bold text-white cursor-pointer">
+                    {{ form.is_active }}
+                    <span>Active on Portal</span>
+                </label>
+                <label class="flex items-center space-x-2 text-xs font-bold text-white cursor-pointer">
+                    {{ form.is_featured }}
+                    <span>Feature on Homepage</span>
+                </label>
+            </div>
+
+            <div class="pt-4 flex items-center justify-end gap-3 border-t border-slate-700">
+                <a href="{% url 'dashboard_programs' %}" class="px-5 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-xs font-bold text-slate-200 transition">Cancel</a>
+                <button type="submit" class="px-6 py-2.5 rounded-xl bg-brand-green hover:bg-brand-darkgreen text-white font-bold text-xs shadow transition">Save Program</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

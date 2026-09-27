@@ -1,0 +1,94 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}{{ title }} - NSUK ODeL Dashboard{% endblock %}
+{% block header_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto py-6">
+    <div class="bg-slate-800/90 rounded-3xl p-8 border border-slate-700 shadow-xl space-y-6">
+        
+        <div class="border-b border-slate-700 pb-4 flex items-center justify-between">
+            <div>
+                <h2 class="font-heading font-bold text-xl text-white">{{ title }}</h2>
+                <p class="text-xs text-slate-400">Configure faculty facilitator or staff profile details</p>
+            </div>
+            <a href="{% url 'dashboard_staff' %}" class="text-xs text-slate-400 hover:text-white">&laquo; Back to Staff</a>
+        </div>
+
+        <form method="post" enctype="multipart/form-data" class="space-y-4">
+            {% csrf_token %}
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Full Name <span class="text-rose-400">*</span></label>
+                    {{ form.full_name }}
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Position / Title</label>
+                    {{ form.position }}
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Category</label>
+                    {{ form.category }}
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Department</label>
+                    {{ form.department }}
+                </div>
+            </div>
+
+            <div class="space-y-1">
+                <label class="block text-xs font-bold text-slate-300">Qualifications (e.g. B.Sc, M.Sc, Ph.D)</label>
+                {{ form.qualifications }}
+            </div>
+
+            <div class="space-y-1">
+                <label class="block text-xs font-bold text-slate-300">Brief Biography / Profile</label>
+                {{ form.biography }}
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Official Email</label>
+                    {{ form.email }}
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Phone Number</label>
+                    {{ form.phone }}
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Upload Photo</label>
+                    {{ form.photo }}
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Photo URL Fallback</label>
+                    {{ form.photo_url }}
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-6 p-4 rounded-2xl bg-slate-900/60 border border-slate-700/60">
+                <label class="flex items-center space-x-2 text-xs font-bold text-white cursor-pointer">
+                    {{ form.is_active }}
+                    <span>Active / Visible on Directory</span>
+                </label>
+                <div class="flex items-center space-x-2">
+                    <span class="text-xs text-slate-400">Sort Order:</span>
+                    <div class="w-20">{{ form.sort_order }}</div>
+                </div>
+            </div>
+
+            <div class="pt-4 flex items-center justify-end gap-3 border-t border-slate-700">
+                <a href="{% url 'dashboard_staff' %}" class="px-5 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-xs font-bold text-slate-200 transition">Cancel</a>
+                <button type="submit" class="px-6 py-2.5 rounded-xl bg-brand-green hover:bg-brand-darkgreen text-white font-bold text-xs shadow transition">Save Staff Profile</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

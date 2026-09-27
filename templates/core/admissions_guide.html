@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% block title %}Admissions & How to Apply - Nasarawa State University, Keffi (ODeL){% endblock %}
+
+{% block content %}
+<section class="bg-gradient-to-r from-brand-navy via-slate-900 to-brand-blue text-white py-14 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <nav class="text-xs font-semibold text-sky-200 flex items-center space-x-2 mb-3">
+            <a href="{% url 'home' %}" class="hover:underline">Home</a>
+            <span>&gt;</span>
+            <span class="text-white">Admissions & How to Apply</span>
+        </nav>
+        <h1 class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white">
+            Admissions & How to Apply
+        </h1>
+        <p class="text-slate-300 text-sm sm:text-base mt-2">
+            Step-by-step guidance on applying for accredited degree programs at NSUK ODeL.
+        </p>
+    </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- Left: Application Process & Steps -->
+        <div class="lg:col-span-8 space-y-10">
+            
+            <!-- Step-by-Step Guide -->
+            <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-sm border border-slate-200/80 space-y-8">
+                <div class="border-b border-slate-100 pb-4">
+                    <span class="text-brand-green font-bold text-xs uppercase tracking-wider">Application Procedure</span>
+                    <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900 mt-1">
+                        4 Easy Steps to Complete Your Application
+                    </h2>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Step 1 -->
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-2xl bg-brand-blue text-white font-extrabold text-base flex items-center justify-center flex-shrink-0 shadow">
+                            1
+                        </div>
+                        <div class="space-y-1 pt-1">
+                            <h3 class="font-heading font-bold text-base text-slate-900">Access the Online Application Portal</h3>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                Visit the official NSUK Application Portal (<a href="{{ site_settings.application_portal_url }}" target="_blank" class="text-brand-blue underline font-semibold">ug.nsuk.edu.ng/application</a>) and select the <strong>Open, Distance and e-Learning (ODeL)</strong> program option.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-2xl bg-brand-green text-white font-extrabold text-base flex items-center justify-center flex-shrink-0 shadow">
+                            2
+                        </div>
+                        <div class="space-y-1 pt-1">
+                            <h3 class="font-heading font-bold text-base text-slate-900">Create Profile & Generate Remita RRR</h3>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                Enter your active email address, full name, and phone number to create your applicant profile. Generate your unique Remita Retrieval Reference (RRR) to pay the application processing fee online or at any commercial bank.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-2xl bg-purple-600 text-white font-extrabold text-base flex items-center justify-center flex-shrink-0 shadow">
+                            3
+                        </div>
+                        <div class="space-y-1 pt-1">
+                            <h3 class="font-heading font-bold text-base text-slate-900">Fill Application Form & Upload Credentials</h3>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                Login to your application dashboard, fill in your bio-data, academic history, O'Level results (WAEC/NECO/NABTEB), and upload scanned copies of your certificates, passport photograph, and direct entry credentials if applicable.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="flex items-start space-x-4">
+                        <div class="w-10 h-10 rounded-2xl bg-amber-500 text-white font-extrabold text-base flex items-center justify-center flex-shrink-0 shadow">
+                            4
+                        </div>
+                        <div class="space-y-1 pt-1">
+                            <h3 class="font-heading font-bold text-base text-slate-900">Submit Application & Print Acknowledgement</h3>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                Review your submitted data for accuracy, click submit, and print your formal Application Slip containing your <strong>Applicant ID</strong> (e.g. ODEL2500008). Keep this ID handy for checking admission updates.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-100 flex flex-wrap items-center gap-4">
+                    <a href="{{ site_settings.application_portal_url }}" target="_blank" rel="noopener" class="px-8 py-4 rounded-xl bg-brand-green hover:bg-brand-darkgreen text-white font-extrabold text-sm shadow-lg transition flex items-center gap-2">
+                        <span>Launch Application Portal</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                    </a>
+                    <a href="{% url 'admission_list' %}" class="px-6 py-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-sm transition">
+                        Check Published Admission List
+                    </a>
+                </div>
+            </div>
+
+            <!-- Program Durations Table -->
+            <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-sm border border-slate-200/80 space-y-6">
+                <h3 class="font-heading font-extrabold text-xl text-slate-900 border-b border-slate-100 pb-3">
+                    Program Duration by Entry Level
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 text-center">
+                        <span class="px-3 py-1 rounded-full bg-brand-blue text-white font-bold text-xs uppercase">100 Level (UTME)</span>
+                        <h4 class="font-heading font-extrabold text-2xl text-slate-900 mt-2">4 Years</h4>
+                        <p class="text-xs text-slate-500">8 Semesters of digital and tutor-guided learning.</p>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 text-center">
+                        <span class="px-3 py-1 rounded-full bg-brand-green text-white font-bold text-xs uppercase">200 Level (Direct Entry)</span>
+                        <h4 class="font-heading font-extrabold text-2xl text-slate-900 mt-2">3 Years</h4>
+                        <p class="text-xs text-slate-500">6 Semesters for ND, NCE or GCE A'Level holders.</p>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 text-center">
+                        <span class="px-3 py-1 rounded-full bg-purple-600 text-white font-bold text-xs uppercase">300 Level (Conversion)</span>
+                        <h4 class="font-heading font-extrabold text-2xl text-slate-900 mt-2">2 Years</h4>
+                        <p class="text-xs text-slate-500">4 Semesters for HND or First Degree graduates.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right: Admissions Help Sidebar -->
+        <div class="lg:col-span-4 space-y-6">
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-4">
+                <h3 class="font-heading font-bold text-slate-900 text-base border-b border-slate-100 pb-3">Admissions Desk</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    Have questions about transcript forwarding, subject combinations, or fees? Contact our admissions officer directly.
+                </p>
+                <div class="space-y-3 pt-2 text-xs">
+                    <a href="tel:{{ site_settings.contact_phone_1 }}" class="flex items-center gap-2 text-brand-blue font-bold hover:underline">
+                        <i class="fa-solid fa-phone"></i> {{ site_settings.contact_phone_1 }}
+                    </a>
+                    <a href="mailto:{{ site_settings.contact_email }}" class="flex items-center gap-2 text-slate-700 font-medium hover:underline">
+                        <i class="fa-solid fa-envelope"></i> {{ site_settings.contact_email }}
+                    </a>
+                    <a href="https://wa.me/{{ site_settings.whatsapp_number }}" target="_blank" class="flex items-center gap-2 text-emerald-600 font-bold hover:underline">
+                        <i class="fa-brands fa-whatsapp text-base"></i> +{{ site_settings.whatsapp_number }} (WhatsApp)
+                    </a>
+                </div>
+            </div>
+
+            <!-- Admission List Widget -->
+            <div class="rounded-3xl bg-gradient-to-br from-brand-navy to-brand-blue p-6 text-white space-y-3 shadow-lg">
+                <span class="px-2.5 py-1 rounded-full bg-brand-green text-xs font-bold uppercase">Live Admission</span>
+                <h4 class="font-heading font-bold text-lg text-white">Check Your Admission Record</h4>
+                <p class="text-xs text-slate-200">View the full list of candidates admitted into the NSUK ODeL degree program.</p>
+                <a href="{% url 'admission_list' %}" class="block text-center py-3 rounded-xl bg-white text-brand-blue font-bold text-xs hover:bg-slate-100 transition shadow">
+                    Open Admission List &raquo;
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

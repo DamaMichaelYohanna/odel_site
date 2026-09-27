@@ -1,0 +1,71 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Inquiries Leads - NSUK ODeL Dashboard{% endblock %}
+{% block header_title %}Prospective Student Inquiries Inbox{% endblock %}
+
+{% block content %}
+<div class="space-y-6 max-w-7xl mx-auto">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+            <h2 class="font-heading font-extrabold text-2xl text-white">Student Inquiries Inbox ({{ total_count }})</h2>
+            <p class="text-xs text-slate-400">Prospective student inquiries and contact requests submitted on the website.</p>
+        </div>
+        <div class="flex items-center gap-2">
+            <a href="{% url 'dashboard_inquiries' %}" class="px-3.5 py-2 rounded-xl text-xs font-bold transition {% if status_filter == 'all' %}bg-brand-blue text-white{% else %}bg-slate-800 text-slate-300 hover:bg-slate-700{% endif %}">
+                All
+            </a>
+            <a href="?status=unread" class="px-3.5 py-2 rounded-xl text-xs font-bold transition {% if status_filter == 'unread' %}bg-amber-500 text-slate-900{% else %}bg-slate-800 text-slate-300 hover:bg-slate-700{% endif %}">
+                Unresolved
+            </a>
+            <a href="?status=resolved" class="px-3.5 py-2 rounded-xl text-xs font-bold transition {% if status_filter == 'resolved' %}bg-brand-green text-white{% else %}bg-slate-800 text-slate-300 hover:bg-slate-700{% endif %}">
+                Resolved
+            </a>
+        </div>
+    </div>
+
+    <div class="bg-slate-800/80 rounded-3xl border border-slate-700 shadow-md overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+                <thead class="bg-slate-900/80 text-slate-400 uppercase tracking-wider text-[10px] border-b border-slate-700">
+                    <tr>
+                        <th class="py-4 px-6">Sender</th>
+                        <th class="py-4 px-6">Subject / Topic</th>
+                        <th class="py-4 px-6">Program of Interest</th>
+                        <th class="py-4 px-6 text-center">Status</th>
+                        <th class="py-4 px-6">Date Received</th>
+                        <th class="py-4 px-6 text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-700/50 font-medium">
+                    {% for inq in page_obj %}
+                    <tr class="hover:bg-slate-750/30 transition {% if not inq.is_resolved %}bg-amber-950/10{% endif %}">
+                        <td class="py-4 px-6">
+                            <span class="font-bold text-white block">{{ inq.full_name }}</span>
+                            <span class="text-[11px] text-slate-400">{{ inq.email }}</span>
+                        </td>
+                        <td class="py-4 px-6 font-semibold text-white max-w-xs truncate">
+                            <a href="{% url 'dashboard_inquiry_detail' pk=inq.pk %}" class="hover:text-brand-blue">{{ inq.subject }}</a>
+                        </td>
+                        <td class="py-4 px-6 text-brand-green">{{ inq.program_of_interest|default:"General" }}</td>
+                        <td class="py-4 px-6 text-center">
+                            {% if inq.is_resolved %}
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-950 text-emerald-300 border border-emerald-800">Resolved</span>
+                            {% else %}
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-950 text-amber-300 border border-amber-800">Pending</span>
+                            {% endif %}
+                        </td>
+                        <td class="py-4 px-6 text-slate-400">{{ inq.created_at|date:"M d, Y H:i" }}</td>
+                        <td class="py-4 px-6 text-right space-x-2">
+                            <a href="{% url 'dashboard_inquiry_detail' pk=inq.pk %}" class="text-sky-400 hover:text-white font-bold"><i class="fa-solid fa-eye"></i> View</a>
+                            <a href="{% url 'dashboard_inquiry_delete' pk=inq.pk %}" class="text-slate-400 hover:text-rose-400"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="6" class="py-8 text-center text-slate-500">No inquiry messages in this inbox view.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

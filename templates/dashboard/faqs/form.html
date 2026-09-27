@@ -1,0 +1,55 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}{{ title }} - NSUK ODeL Dashboard{% endblock %}
+{% block header_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto py-6">
+    <div class="bg-slate-800/90 rounded-3xl p-8 border border-slate-700 shadow-xl space-y-6">
+        
+        <div class="border-b border-slate-700 pb-4 flex items-center justify-between">
+            <div>
+                <h2 class="font-heading font-bold text-xl text-white">{{ title }}</h2>
+                <p class="text-xs text-slate-400">Configure frequently asked question and answer</p>
+            </div>
+            <a href="{% url 'dashboard_faqs' %}" class="text-xs text-slate-400 hover:text-white">&laquo; Back to FAQs</a>
+        </div>
+
+        <form method="post" class="space-y-4">
+            {% csrf_token %}
+            
+            <div class="space-y-1">
+                <label class="block text-xs font-bold text-slate-300">Question <span class="text-rose-400">*</span></label>
+                {{ form.question }}
+            </div>
+
+            <div class="space-y-1">
+                <label class="block text-xs font-bold text-slate-300">Category</label>
+                {{ form.category }}
+            </div>
+
+            <div class="space-y-1">
+                <label class="block text-xs font-bold text-slate-300">Answer Explanation <span class="text-rose-400">*</span></label>
+                {{ form.answer }}
+            </div>
+
+            <div class="flex items-center space-x-6 p-4 rounded-2xl bg-slate-900/60 border border-slate-700/60">
+                <label class="flex items-center space-x-2 text-xs font-bold text-white cursor-pointer">
+                    {{ form.is_active }}
+                    <span>Active on FAQ Page</span>
+                </label>
+                <div class="flex items-center space-x-2">
+                    <span class="text-xs text-slate-400">Order:</span>
+                    <div class="w-20">{{ form.sort_order }}</div>
+                </div>
+            </div>
+
+            <div class="pt-4 flex items-center justify-end gap-3 border-t border-slate-700">
+                <a href="{% url 'dashboard_faqs' %}" class="px-5 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-xs font-bold text-slate-200 transition">Cancel</a>
+                <button type="submit" class="px-6 py-2.5 rounded-xl bg-brand-green hover:bg-brand-darkgreen text-white font-bold text-xs shadow transition">Save FAQ</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

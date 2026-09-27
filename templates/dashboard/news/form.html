@@ -1,0 +1,83 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}{{ title }} - NSUK ODeL Dashboard{% endblock %}
+{% block header_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto py-6">
+    <div class="bg-slate-800/90 rounded-3xl p-8 border border-slate-700 shadow-xl space-y-6">
+        
+        <div class="border-b border-slate-700 pb-4 flex items-center justify-between">
+            <div>
+                <h2 class="font-heading font-bold text-xl text-white">{{ title }}</h2>
+                <p class="text-xs text-slate-400">Publish news, announcements, or event coverage</p>
+            </div>
+            <a href="{% url 'dashboard_news' %}" class="text-xs text-slate-400 hover:text-white">&laquo; Back to News</a>
+        </div>
+
+        <form method="post" enctype="multipart/form-data" class="space-y-4">
+            {% csrf_token %}
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Article Title <span class="text-rose-400">*</span></label>
+                    {{ form.title }}
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Category</label>
+                    {{ form.category }}
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">URL Slug (Optional)</label>
+                    {{ form.slug }}
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Event Date (If applicable)</label>
+                    {{ form.event_date }}
+                </div>
+            </div>
+
+            <div class="space-y-1">
+                <label class="block text-xs font-bold text-slate-300">Short Excerpt / Teaser Paragraph</label>
+                {{ form.excerpt }}
+            </div>
+
+            <div class="space-y-1">
+                <label class="block text-xs font-bold text-slate-300">Full Article Content</label>
+                {{ form.content }}
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Upload Featured Image</label>
+                    {{ form.featured_image }}
+                </div>
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-300">Image URL Fallback</label>
+                    {{ form.featured_image_url }}
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-6 p-4 rounded-2xl bg-slate-900/60 border border-slate-700/60">
+                <label class="flex items-center space-x-2 text-xs font-bold text-white cursor-pointer">
+                    {{ form.is_active }}
+                    <span>Publish to Live Site</span>
+                </label>
+                <label class="flex items-center space-x-2 text-xs font-bold text-white cursor-pointer">
+                    {{ form.is_featured }}
+                    <span>Featured on Home Slider</span>
+                </label>
+            </div>
+
+            <div class="pt-4 flex items-center justify-end gap-3 border-t border-slate-700">
+                <a href="{% url 'dashboard_news' %}" class="px-5 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-xs font-bold text-slate-200 transition">Cancel</a>
+                <button type="submit" class="px-6 py-2.5 rounded-xl bg-brand-green hover:bg-brand-darkgreen text-white font-bold text-xs shadow transition">Publish Story</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

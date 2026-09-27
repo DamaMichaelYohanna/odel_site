@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title }} - Nasarawa State University, Keffi (ODeL){% endblock %}
+
+{% block content %}
+<section class="bg-gradient-to-r from-brand-navy via-slate-900 to-brand-blue text-white py-14 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <nav class="text-xs font-semibold text-sky-200 flex items-center space-x-2 mb-3">
+            <a href="{% url 'home' %}" class="hover:underline">Home</a>
+            <span>&gt;</span>
+            <a href="{% url 'news_list' %}" class="hover:underline">News & Events</a>
+            <span>&gt;</span>
+            <span class="text-white truncate max-w-xs">{{ article.title }}</span>
+        </nav>
+        <div class="max-w-4xl space-y-3">
+            <span class="px-3 py-1 rounded-full bg-brand-green text-white font-bold text-xs uppercase">{{ article.get_category_display }}</span>
+            <h1 class="font-heading font-extrabold text-2xl sm:text-3xl lg:text-4xl text-white leading-tight">
+                {{ article.title }}
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-300 flex items-center gap-4">
+                <span><i class="fa-solid fa-calendar mr-1 text-brand-green"></i> Published: {{ article.created_at|date:"F d, Y" }}</span>
+                {% if article.event_date %}
+                <span>•</span>
+                <span><i class="fa-solid fa-clock mr-1 text-amber-300"></i> Event Date: {{ article.event_date|date:"F d, Y" }}</span>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- Main Article Content -->
+        <article class="lg:col-span-8 bg-white rounded-3xl p-8 sm:p-10 shadow-sm border border-slate-200/80 space-y-6">
+            
+            {% if article.featured_image or article.featured_image_url %}
+            <div class="rounded-2xl overflow-hidden shadow-md max-h-[420px] bg-slate-100">
+                <img src="{{ article.get_image }}" alt="{{ article.title }}" class="w-full h-full object-cover">
+            </div>
+            {% endif %}
+
+            <div class="p-4 rounded-2xl bg-sky-50 border-l-4 border-brand-blue text-sm text-slate-700 italic">
+                {{ article.excerpt }}
+            </div>
+
+            <div class="text-slate-700 leading-relaxed text-sm sm:text-base text-justify space-y-4">
+                {{ article.content|linebreaks }}
+            </div>
+
+            <div class="pt-8 border-t border-slate-100 flex items-center justify-between">
+                <a href="{% url 'news_list' %}" class="text-xs font-bold text-brand-blue hover:underline flex items-center gap-1">
+                    &laquo; Back to All News
+                </a>
+                <a href="{% url 'how_to_apply' %}" class="px-4 py-2 rounded-xl bg-brand-green hover:bg-brand-darkgreen text-white font-bold text-xs shadow transition">
+                    Apply Online
+                </a>
+            </div>
+
+        </article>
+
+        <!-- Sidebar: Recent News -->
+        <div class="lg:col-span-4 space-y-6">
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-4">
+                <h3 class="font-heading font-bold text-slate-900 text-base border-b border-slate-100 pb-3">Recent Updates</h3>
+                
+                <div class="space-y-4">
+                    {% for item in recent_news %}
+                    <a href="{{ item.get_absolute_url }}" class="block group space-y-1">
+                        <span class="text-[10px] font-bold text-brand-green uppercase">{{ item.get_category_display }}</span>
+                        <h4 class="font-bold text-xs sm:text-sm text-slate-800 group-hover:text-brand-blue transition-colors line-clamp-2 leading-snug">
+                            {{ item.title }}
+                        </h4>
+                        <span class="text-[11px] text-slate-400 block">{{ item.created_at|date:"M d, Y" }}</span>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="rounded-3xl bg-slate-900 p-6 text-white space-y-3 shadow-md">
+                <h4 class="font-heading font-bold text-base text-white">Student & Applicant Portals</h4>
+                <div class="space-y-2 text-xs">
+                    <a href="{{ site_settings.application_portal_url }}" target="_blank" class="block py-2 px-3 rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold transition">
+                        Undergraduate Application &raquo;
+                    </a>
+                    <a href="{{ site_settings.student_portal_url }}" target="_blank" class="block py-2 px-3 rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold transition">
+                        Student Portal Login &raquo;
+                    </a>
+                    <a href="{% url 'admission_list' %}" class="block py-2 px-3 rounded-lg bg-brand-green text-white font-bold transition">
+                        View Admission List &raquo;
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

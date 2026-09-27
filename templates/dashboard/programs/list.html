@@ -1,0 +1,60 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Manage Programs - NSUK ODeL Dashboard{% endblock %}
+{% block header_title %}Academic Programs Directory{% endblock %}
+
+{% block content %}
+<div class="space-y-6 max-w-7xl mx-auto">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+            <h2 class="font-heading font-extrabold text-2xl text-white">Academic Programs</h2>
+            <p class="text-xs text-slate-400">Manage degree programs, entry requirements, and accreditation statuses.</p>
+        </div>
+        <a href="{% url 'dashboard_program_create' %}" class="px-4 py-2.5 rounded-xl bg-brand-green hover:bg-brand-darkgreen text-xs font-bold text-white shadow transition flex items-center gap-1.5">
+            <i class="fa-solid fa-plus"></i> Add New Program
+        </a>
+    </div>
+
+    <div class="bg-slate-800/80 rounded-3xl border border-slate-700 shadow-md overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+                <thead class="bg-slate-900/80 text-slate-400 uppercase tracking-wider text-[10px] border-b border-slate-700">
+                    <tr>
+                        <th class="py-4 px-6">Program Name</th>
+                        <th class="py-4 px-6">Faculty / Department</th>
+                        <th class="py-4 px-6">Degree Type</th>
+                        <th class="py-4 px-6 text-center">Status</th>
+                        <th class="py-4 px-6 text-center">Courses</th>
+                        <th class="py-4 px-6 text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-700/50 font-medium">
+                    {% for p in programs %}
+                    <tr class="hover:bg-slate-750/30 transition">
+                        <td class="py-4 px-6 font-bold text-white text-sm">
+                            <a href="{% url 'dashboard_program_edit' pk=p.pk %}" class="hover:text-brand-blue">{{ p.name }}</a>
+                        </td>
+                        <td class="py-4 px-6 text-slate-400">{{ p.faculty }}</td>
+                        <td class="py-4 px-6 font-semibold text-brand-green">{{ p.get_degree_type_display }}</td>
+                        <td class="py-4 px-6 text-center">
+                            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold {% if p.status == 'Active' %}bg-emerald-950 text-emerald-300 border border-emerald-800{% else %}bg-amber-950 text-amber-300 border border-amber-800{% endif %}">
+                                {{ p.status }}
+                            </span>
+                        </td>
+                        <td class="py-4 px-6 text-center">
+                            <span class="px-2 py-0.5 rounded bg-slate-900 font-bold text-slate-200">{{ p.courses.count }} units</span>
+                        </td>
+                        <td class="py-4 px-6 text-right space-x-2">
+                            <a href="{% url 'dashboard_program_edit' pk=p.pk %}" class="text-slate-400 hover:text-sky-400"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="{% url 'dashboard_program_delete' pk=p.pk %}" class="text-slate-400 hover:text-rose-400"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="6" class="py-8 text-center text-slate-500">No programs listed yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

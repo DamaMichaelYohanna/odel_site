@@ -1,0 +1,62 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Manage Staff - NSUK ODeL Dashboard{% endblock %}
+{% block header_title %}Staff & Faculty Directory{% endblock %}
+
+{% block content %}
+<div class="space-y-6 max-w-7xl mx-auto">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+            <h2 class="font-heading font-extrabold text-2xl text-white">Staff Members</h2>
+            <p class="text-xs text-slate-400">Manage leadership, academic facilitators, and technical team profiles.</p>
+        </div>
+        <a href="{% url 'dashboard_staff_create' %}" class="px-4 py-2.5 rounded-xl bg-brand-green hover:bg-brand-darkgreen text-xs font-bold text-white shadow transition flex items-center gap-1.5">
+            <i class="fa-solid fa-user-plus"></i> Add Staff Member
+        </a>
+    </div>
+
+    <div class="bg-slate-800/80 rounded-3xl border border-slate-700 shadow-md overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300">
+                <thead class="bg-slate-900/80 text-slate-400 uppercase tracking-wider text-[10px] border-b border-slate-700">
+                    <tr>
+                        <th class="py-4 px-6">Staff Member</th>
+                        <th class="py-4 px-6">Position</th>
+                        <th class="py-4 px-6">Category</th>
+                        <th class="py-4 px-6">Contact</th>
+                        <th class="py-4 px-6 text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-700/50 font-medium">
+                    {% for s in staff_members %}
+                    <tr class="hover:bg-slate-750/30 transition">
+                        <td class="py-4 px-6 flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full overflow-hidden bg-slate-700 flex-shrink-0">
+                                <img src="{{ s.get_photo }}" alt="{{ s.full_name }}" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <span class="font-bold text-white text-sm block">{{ s.full_name }}</span>
+                                <span class="text-[11px] text-slate-400">{{ s.qualifications }}</span>
+                            </div>
+                        </td>
+                        <td class="py-4 px-6 text-brand-green font-semibold">{{ s.position }}</td>
+                        <td class="py-4 px-6">
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-900 text-sky-300 border border-slate-700">{{ s.get_category_display }}</span>
+                        </td>
+                        <td class="py-4 px-6 text-slate-400">
+                            {{ s.email|default:s.phone|default:"-" }}
+                        </td>
+                        <td class="py-4 px-6 text-right space-x-2">
+                            <a href="{% url 'dashboard_staff_edit' pk=s.pk %}" class="text-slate-400 hover:text-sky-400"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="{% url 'dashboard_staff_delete' pk=s.pk %}" class="text-slate-400 hover:text-rose-400"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="5" class="py-8 text-center text-slate-500">No staff members listed.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
