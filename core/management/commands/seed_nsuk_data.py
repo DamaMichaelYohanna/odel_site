@@ -15,15 +15,15 @@ class Command(BaseCommand):
 
         # 1. Admin Superuser
         admin_user, created = User.objects.get_or_create(username='admin')
-        if created or not admin_user.check_password('admin12345'):
-            admin_user.set_password('admin12345')
+        if created or not admin_user.check_password('admin@123'):
+            admin_user.set_password('admin@123')
             admin_user.is_staff = True
             admin_user.is_superuser = True
             admin_user.first_name = "ODeL"
             admin_user.last_name = "Administrator"
             admin_user.email = "admin@odel.nsuk.edu.ng"
             admin_user.save()
-            self.stdout.write(self.style.SUCCESS("Created admin user (admin / admin12345)"))
+            self.stdout.write(self.style.SUCCESS("Created admin user (admin / admin@123)"))
 
         # 2. Site Settings
         settings = SiteSetting.get_settings()
@@ -44,8 +44,10 @@ class Command(BaseCommand):
         settings.library_portal_url = "https://nsuk.edu.ng/library/"
         settings.vc_name = "Prof. Sa'adatu Hassan Liman, FELLOW: ASAS, FIPMA, FICA, FHEA(UK)"
         settings.vc_title = "Vice-Chancellor, Nasarawa State University, Keffi"
-        settings.director_name = "Prof. Muhammad Haruna"
+        settings.vc_image = "leadership/vc.jpg"
+        settings.director_name = "Prof. Benneth Colman Uzoechi"
         settings.director_title = "Director, Directorate of Open, Distance and e-Learning"
+        settings.director_image = "leadership/director.jpg"
         settings.save()
 
         # 3. Hero Slides
@@ -342,53 +344,176 @@ class Command(BaseCommand):
                 status="Admitted"
             )
 
-        # 7. Staff & Facilitators Directory
+        # 7. Authentic Staff & Facilitators Directory from odel.nsuk.edu.ng/our-staff/
         StaffMember.objects.all().delete()
         staff_data = [
             {
-                'full_name': "Prof. Muhammad Haruna",
-                'position': "Director, Directorate of ODeL",
+                'full_name': "Prof. Benneth Colman Uzoechi",
+                'position': "Director",
                 'category': "Leadership",
-                'department': "Directorate of Open, Distance & e-Learning",
-                'qualifications': "B.Sc, M.Sc, Ph.D, FNIM",
-                'biography': "Experienced academic administrator leading the technological and institutional expansion of digital distance education at NSUK.",
-                'photo_url': "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80",
+                'department': "Directorate of Open, Distance & e-Learning (ODeL)",
+                'qualifications': "Ph.D, FIM, Professor",
+                'biography': "Director of the Directorate of Open Distance and e-Learning (ODeL), Nasarawa State University, Keffi.",
+                'photo': "staff/prof_benneth_uzoechi.jpg",
+                'photo_url': "https://odel.nsuk.edu.ng/wp-content/uploads/2024/02/ODEL-DIRECTOR.jpg",
                 'email': "director.odel@nsuk.edu.ng",
                 'phone': "+234 902 350 0752",
-                'sort_order': 1
+                'sort_order': 1,
+                'is_active': True,
             },
             {
-                'full_name': "Dr. Aliyu Danladi Ibrahim",
-                'position': "Deputy Director (Academic Facilitation)",
+                'full_name': "Dr. Salihu Abdullahi Audu",
+                'position': "Deputy Director",
                 'category': "Leadership",
-                'department': "Faculty of Administration",
-                'qualifications': "B.Sc, M.Sc, Ph.D",
-                'biography': "Coordinates online course curriculum delivery, instructional design, and virtual tutor engagements.",
-                'photo_url': "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
-                'email': "academic.odel@nsuk.edu.ng",
-                'sort_order': 2
+                'department': "Directorate of Open, Distance & e-Learning (ODeL)",
+                'qualifications': "Ph.D",
+                'biography': "Deputy Director of the Directorate of Open Distance and e-Learning (ODeL), Nasarawa State University, Keffi.",
+                'photo': "staff/dr_salihu_audu.jpg",
+                'photo_url': "https://odel.nsuk.edu.ng/wp-content/uploads/2026/06/IMG_4099-1.jpg",
+                'email': "deputy.director.odel@nsuk.edu.ng",
+                'phone': "+234 902 350 0752",
+                'sort_order': 2,
+                'is_active': True,
             },
             {
-                'full_name': "Engr. Kenneth E. Eze",
-                'position': "Lead LMS & Technical Systems Engineer",
+                'full_name': "Dr. Odonye Dauda Yusuf",
+                'position': "Programme Coordinator",
+                'category': "Academic",
+                'department": "Department of Public Administration / ODeL",
+                'qualifications': "Ph.D",
+                'biography': "Programme Coordinator for Open Distance and e-Learning programmes at NSUK.",
+                'photo': "staff/dr_odonye_yusuf.jpg",
+                'photo_url': "https://odel.nsuk.edu.ng/wp-content/uploads/2025/03/odonye.jpg",
+                'email': "coordinator.odel@nsuk.edu.ng",
+                'phone': "+234 902 350 0752",
+                'sort_order': 3,
+                'is_active': True,
+            },
+            {
+                'full_name': "Dr. Iya Haruna Ayuba",
+                'position': "Head, Guidance and Counselling",
+                'category': "Academic",
+                'department': "Guidance & Counselling Unit, ODeL",
+                'qualifications': "Ph.D",
+                'biography': "Head of Guidance and Counselling, supporting distance learning students with academic guidance and mentoring.",
+                'photo': "staff/dr_iya_ayuba.jpg",
+                'photo_url': "https://odel.nsuk.edu.ng/wp-content/uploads/2025/03/iyah.jpg",
+                'email': "counselling.odel@nsuk.edu.ng",
+                'phone': "+234 902 350 0752",
+                'sort_order': 4,
+                'is_active': True,
+            },
+            {
+                'full_name': "Mrs. Hajara J Garba",
+                'position': "ICT Coordinator",
                 'category': "Technical",
-                'department': "ICT Directorate / ODeL Systems",
-                'qualifications': "B.Eng, M.Sc (Software Systems), CCNA",
-                'biography': "Administers the Moodle LMS architecture, CBT examination server nodes, and online proctoring modules.",
-                'photo_url': "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
-                'email': "lms.support@nsuk.edu.ng",
-                'sort_order': 3
+                'department': "ODeL Information & Communication Technology Unit",
+                'qualifications': "M.Sc, B.Sc",
+                'biography': "ICT Coordinator managing technological infrastructure, digital classrooms, and network systems for ODeL.",
+                'photo': "staff/mrs_hajara_garba.jpg",
+                'photo_url': "https://odel.nsuk.edu.ng/wp-content/uploads/2025/03/HAJO.jpg",
+                'email': "ict.odel@nsuk.edu.ng",
+                'phone': "+234 902 350 0752",
+                'sort_order': 5,
+                'is_active': True,
             },
             {
-                'full_name': "Mrs. Hauwa Bello Yakubu",
-                'position': "Admissions & Learner Support Officer",
+                'full_name': "Dama Williams Yohanna",
+                'position': "ODeL Webmaster/DB Analyst",
+                'category': "Technical",
+                'department': "ODeL Systems & Database Unit",
+                'qualifications': "B.Sc, Webmaster & Database Administrator",
+                'biography': "ODeL Webmaster and Database Analyst in charge of digital portals, LMS, database security, and web applications.",
+                'photo': "staff/dama_williams_yohanna.jpg",
+                'photo_url': "https://odel.nsuk.edu.ng/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-08-at-10.02.13-AM.jpeg",
+                'email': "webmaster.odel@nsuk.edu.ng",
+                'phone': "+234 902 350 0752",
+                'sort_order': 6,
+                'is_active': True,
+            },
+            {
+                'full_name': "Mr. Ibrahim Liman",
+                'position': "ODeL Help Desk Officer",
+                'category': "Technical",
+                'department': "ODeL Learner Support & Help Desk Unit",
+                'qualifications': "Support Specialist",
+                'biography': "Help Desk Officer providing frontline student support, technical assistance, and LMS navigation guidance.",
+                'photo': "staff/mr_ibrahim_liman.jpg",
+                'photo_url': "https://odel.nsuk.edu.ng/wp-content/uploads/2025/03/ibro.jpeg",
+                'email': "helpdesk.odel@nsuk.edu.ng",
+                'phone': "+234 902 350 0752",
+                'sort_order': 7,
+                'is_active': True,
+            },
+            {
+                'full_name': "Mrs. Zainab Maikasuwa",
+                'position': "ODeL Secretary",
                 'category': "Administrative",
-                'department': "ODeL Admissions Registry",
-                'qualifications': "B.A, MPA",
-                'biography': "Oversees prospective candidate documentation, admission list publications, and direct learner inquiries.",
-                'photo_url': "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80",
-                'email': "admissions.odel@nsuk.edu.ng",
-                'sort_order': 4
+                'department': "ODeL Directorate Secretariat",
+                'qualifications': "Secretarial Administration",
+                'biography': "Directorate Secretary managing administrative documentation, confidential correspondence, and executive coordination.",
+                'photo': "staff/mrs_zainab_maikasuwa.jpg",
+                'photo_url': "https://odel.nsuk.edu.ng/wp-content/uploads/2025/03/WhatsApp-Image-2025-03-05-at-3.12.03-AM.jpeg",
+                'email': "secretary.odel@nsuk.edu.ng",
+                'phone': "+234 902 350 0752",
+                'sort_order': 8,
+                'is_active': True,
+            },
+            {
+                'full_name': "Dr. Yakubu Jacob Umaru",
+                'position': "Programmes & Editorial Coordinator",
+                'category': "Academic",
+                'department': "ODeL Academic & Editorial Unit",
+                'qualifications': "Ph.D",
+                'biography': "Programmes and Editorial Coordinator supervising instructional courseware design, module peer review, and editorial quality.",
+                'photo': "staff/dr_yakubu_umaru.jpg",
+                'photo_url': "https://odel.nsuk.edu.ng/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-15-at-4.59.41-AM.jpeg",
+                'email': "editorial.odel@nsuk.edu.ng",
+                'phone': "+234 902 350 0752",
+                'sort_order': 9,
+                'is_active': True,
+            },
+            {
+                'full_name': "Mr. Kumiyawo James Ayinda",
+                'position': "Finance Officer",
+                'category': "Administrative",
+                'department': "ODeL Finance & Accounts Unit",
+                'qualifications': "B.Sc, Accountant",
+                'biography': "Finance Officer managing student fee administration, accounting reconciliations, and budget compliance.",
+                'photo': "staff/mr_kumiyawo_ayinda.jpg",
+                'photo_url': "https://odel.nsuk.edu.ng/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-14-at-3.44.57-AM-1.jpeg",
+                'email': "finance.odel@nsuk.edu.ng",
+                'phone': "+234 902 350 0752",
+                'sort_order': 10,
+                'is_active': True,
+            },
+            {
+                'full_name': "Dr. Ossai Onyeka Peter",
+                'position': "E-Tutor",
+                'category': "Academic",
+                'department': "ODeL Academic Facilitation Unit",
+                'qualifications': "Ph.D",
+                'biography': "E-Tutor conducting online seminars, virtual study sessions, continuous assessments, and academic tutoring.",
+                'photo': "staff/dr_ossai_peter.jpg",
+                'photo_url': "https://odel.nsuk.edu.ng/wp-content/uploads/2025/11/osai.jpeg",
+                'email': "tutor.ossai@nsuk.edu.ng",
+                'phone': "+234 902 350 0752",
+                'sort_order': 11,
+                'is_active': True,
+            },
+            {
+                'full_name': "Mr. Sini Obidah",
+                'position': "E-Tutor",
+                'category': "Academic",
+                'department': "ODeL Academic Facilitation Unit",
+                'qualifications': "M.Sc, Facilitator",
+                'biography': "E-Tutor facilitating distance learning lectures, course forum discussions, and online student academic tutoring.",
+                'photo': "staff/mr_sini_obidah.jpg",
+                'photo_url': "https://odel.nsuk.edu.ng/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-03-at-4.26.40-AM.jpeg",
+                'email': "tutor.sini@nsuk.edu.ng",
+                'phone': "+234 902 350 0752",
+                'sort_order': 12,
+                'is_active': True,
             },
         ]
         for s in staff_data:

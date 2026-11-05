@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}ODeL History - Nasarawa State University, Keffi{% endblock %}
+{% block title %}ODeL History – Nasarawa State University, Keffi{% endblock %}
 
 {% block content %}
 <!-- Page Header -->
@@ -9,15 +9,18 @@
         <nav class="text-xs font-semibold text-sky-200 flex items-center space-x-2 mb-3">
             <a href="{% url 'home' %}" class="hover:underline">Home</a>
             <span>&gt;</span>
-            <a href="{% url 'history' %}" class="hover:underline">About Us</a>
+            <span class="text-slate-300">About Us</span>
             <span>&gt;</span>
             <span class="text-white">ODeL History</span>
         </nav>
+        <span class="px-3.5 py-1 rounded-full bg-brand-green/30 text-emerald-300 text-xs font-bold uppercase tracking-wider inline-block mb-3 border border-emerald-400/30">
+            Institutional Background
+        </span>
         <h1 class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white">
-            ODeL History & Mandate
+            ODeL History
         </h1>
-        <p class="text-slate-300 text-sm sm:text-base mt-2">
-            The founding vision, institutional mandate, and evolution of Open Distance Learning at NSUK.
+        <p class="text-slate-300 text-sm sm:text-base mt-2 max-w-3xl">
+            Our humble beginning, institutional mandate, and the evolution of Open, Distance and e-Learning at Nasarawa State University, Keffi.
         </p>
     </div>
 </section>
@@ -26,43 +29,115 @@
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
         
+        <!-- Main Content Area -->
         <div class="lg:col-span-8 space-y-8">
             <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-sm border border-slate-200/80 space-y-6 text-slate-700 leading-relaxed text-sm sm:text-base text-justify">
-                <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900">
-                    Institutional Background & Philosophy
-                </h2>
                 
+                <!-- Institutional Image Banner -->
+                <div class="rounded-2xl overflow-hidden shadow-md border border-slate-200 mb-6">
+                    <img src="/media/banners/nsuk_senate_building.jpg" alt="NSUK Senate Building" class="w-full h-64 sm:h-80 object-cover object-center">
+                    <div class="bg-slate-50 px-4 py-2.5 text-xs text-slate-500 border-t border-slate-200 flex items-center justify-between">
+                        <span><i class="fa-solid fa-building-columns text-brand-green mr-1.5"></i> Senate Building, Nasarawa State University, Keffi</span>
+                        <span class="font-semibold text-slate-700">Established 2001</span>
+                    </div>
+                </div>
+
+                <div class="border-b border-slate-200 pb-4">
+                    <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900">
+                        Our Humble Beginning
+                    </h2>
+                </div>
+                
+                <!-- Paragraph 1 -->
                 <p>
-                    Nasarawa State University, Keffi was established in 2001 under the Nasarawa State Law No. 2 of 2001 as passed by the State House of Assembly. The university was founded upon the philosophy of the <em>"belief in excellence, creativity, productivity and freedom of conscience for the advancement of individual and humanity."</em>
-                </p>
-                <p>
-                    The mandate of the university is to pursue and foster <strong>"knowledge for development"</strong>. In line with the vision, thoughts, and aspirations of the founding fathers of the university, the administration seeks to make Nasarawa State University a 21st-century academic giant and pacesetter in teaching, research, and innovation tailored towards people-oriented community service, national development, and global visibility.
+                    Nasarawa State University, Keffi was established in 2001 under the Nasarawa State Law No. 2 of 2001 as passed by the stated House of Assembly. The university was founded upon the philosophy of the, <em>&ldquo;believe in excellence, creativity, productivity and freedom of conscience for the advancement of individual and humanity.&rdquo;</em> The mandate of the university is to pursue and foster <strong>&ldquo;knowledge for development&rdquo;</strong>. In line with the vision, thoughts and aspirations of the founding fathers of the university, the current administration seeks to make Nasarawa State University a 21st-century academic giant and pacesetter in teaching, research and innovation tailored towards people-oriented community service national development, global visibility and competitiveness.
                 </p>
 
-                <div class="p-6 rounded-2xl bg-sky-50 border-l-4 border-brand-blue space-y-2 my-6">
-                    <h4 class="font-heading font-bold text-slate-900 text-base">The Directorate of Open, Distance and e-Learning (ODeL)</h4>
-                    <p class="text-xs sm:text-sm text-slate-600">
-                        In recognition of the changing dynamics of the global educational ecosystem and the need to democratize higher education for qualified individuals constrained by work, distance, or family commitments, NSUK established the Directorate of Open, Distance and e-Learning with full approval from the National Universities Commission (NUC).
+                <!-- Paragraph 2 & Vision / Mission Highlight -->
+                <div class="p-6 rounded-2xl bg-gradient-to-br from-sky-50 to-emerald-50/50 border border-sky-100 my-4 space-y-4">
+                    <p class="text-slate-800 leading-relaxed font-normal">
+                        The vision of the university is <strong>&ldquo;to be a world-class centre of excellence for the development of the individual and society&rdquo;</strong> and a mission <strong>to provide and promote qualitative, innovative and stimulating teaching, learning and research environment to enable individuals to develop their full potential for efficient, effective, dedicated and selfless service to the state, the nation and humanity</strong>.
                     </p>
                 </div>
 
-                <h3 class="font-heading font-bold text-xl text-slate-900 pt-2">Our Vision</h3>
+                <!-- Paragraph 3 -->
                 <p>
-                    To be a premier e-learning institution in Africa that delivers flexible, inclusive, technology-driven, and internationally recognized academic programs for personal growth and societal transformation.
+                    The goals and objectives of the University are premised on the University’s core functions of teaching, learning, research, community service, partnerships and collaboration.
                 </p>
 
-                <h3 class="font-heading font-bold text-xl text-slate-900 pt-2">Our Mission</h3>
-                <ul class="list-disc pl-6 space-y-2 text-sm sm:text-base">
-                    <li>Deliver top-tier tertiary education through innovative digital learning management technologies.</li>
-                    <li>Ensure equitable access to quality education regardless of location, background, or physical barriers.</li>
-                    <li>Foster lifelong learning, critical inquiry, and technical competency aligned with the contemporary job market.</li>
-                    <li>Maintain rigorous academic integrity through cutting-edge Computer-Based Testing (CBT) and proctored assessment systems.</li>
-                </ul>
-
-                <h3 class="font-heading font-bold text-xl text-slate-900 pt-2">Pioneer Program</h3>
+                <!-- Paragraph 4 -->
                 <p>
-                    The Directorate commenced academic operations with the approved flagship <strong>Bachelor of Science (B.Sc) in Public Administration</strong>. Proposed and approved upcoming additions to the Directorate's offerings include Computer Science, Business Administration, Accounting, Entrepreneurship, and Economics.
+                    In keeping with global trends, the university is re-appraising and re-examining its structure, policies and processes in line with its vision and mission and aspirations of the founding fathers with a view to improving performance on our mandate and repositioning our university to meet the educational challenges and expectations of the 21st-century world.
                 </p>
+
+                <!-- Middle Image: Academic Convocation / Auditorium -->
+                <div class="rounded-2xl overflow-hidden shadow-md border border-slate-200 my-6">
+                    <img src="/media/banners/banner_1.jpg" alt="NSUK Academic Procession & Auditorium" class="w-full h-64 sm:h-72 object-cover object-center">
+                    <div class="bg-slate-50 px-4 py-2.5 text-xs text-slate-500 border-t border-slate-200">
+                        <i class="fa-solid fa-graduation-cap text-brand-blue mr-1.5"></i> Academic Leadership, Faculty, and Matriculation Candidates at S.B. Mohammed Auditorium
+                    </div>
+                </div>
+
+                <!-- Paragraph 5 -->
+                <p>
+                    From its inception till now, the University has focused on the face-to-face mode of programme delivery. It is observed however that this mode is grossly inadequate for meeting the demand for higher level education, especially among the over 200 million people that constitute the population of the country where a very high percentage of the youths and adults alike are yenning for higher education. The university has also been recording an astronomical increase, year after year in the demand for admission by both indigenes of Nasarawa State and non-indigenes alike to the extent that the university is unable to satisfy the admission needs of the teeming population that has subscribed for admission. The high demand for admission into the university could be attributed to the quality of education being offered by the university. Nasarawa State University has continued to demonstrate an unwavering commitment to education as a tool for societal, state, national and personal development, and as an inalienable right of every citizen. The socio-economic dimensions of providing education for all are huge, bearing in mind the large and growing population of people seeking tertiary education, especially in the state and beyond. The university also realises the need to take advantage of emerging developments in the field of information and communications technology (ICT), which had revolutionised the techniques and methods of instructional deliveries in all forms of formal and non-formal education. The university is very much aware, following current global trends in education delivery, that educational institutions, especially universities will in the nearest future be defined and ranked not only by physical growth in learning infrastructure but also by the creative and innovative deployment of ICT in teaching, learning, research and educational administration to satisfy learner needs in diverse locations. Across the world, there is increasing demand for this form of education called distance learning.
+                </p>
+
+                <!-- Paragraph 6 -->
+                <p>
+                    Nasarawa State University, in line with the Nigerian National Policy on Education (2004) has over the years recognized the place of open and distance learning in achieving lifelong education. The university has over the years demonstrated its commitment to enhancing lifelong education for sustainable human capital development.
+                </p>
+
+                <!-- Paragraph 7 -->
+                <div class="p-6 rounded-2xl bg-amber-50/80 border-l-4 border-amber-500 space-y-2 my-4">
+                    <h4 class="font-heading font-bold text-amber-950 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-stamp text-amber-600"></i> Senate Approval and Council Ratification
+                    </h4>
+                    <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                        Based on its resolve to re-position itself to meet the aspirations of the founding fathers and to compete favourably in the ever-changing academic world, the Nasarawa State University administration proposed to its Senate the establishment of an Open and distance learning Centre. This proposal was approved by the Senate and ratified by the Governing Council of the university based on the amendment and inclusion of the establishment of an Open and Distance Learning Centre and commencement of distance learning programmes in the strategic documents of the university.
+                    </p>
+                </div>
+
+                <!-- Paragraph 8 -->
+                <p>
+                    The establishment of open distance learning education is one of the key institutional strategies of Nasarawa State University to enhance its ranking status among universities in Nigeria and across the globe as it believes that this is one of the ways to achieve global visibility, competitiveness and increase in access to quality university education for the over 20000 candidates who subscribe to the university annually and those who otherwise would have been deprived through the conventional process because of employment, age and other social and economic commitments. Furthermore, the educational services being offered in the University are also demanded by foreign candidates who are not desirous of a permanent change of residence during the period of studentship. The University has observed therefore that the distance learning mode of programme delivery is now requisite at this stage in the development of the University. In careful consideration of this trend, the University Senate and Governing Council have with a deep sense of responsibility decided to respond positively by proposing to venture into the distance learning mode, by establishing a Centre for Distance Learning, not only for the benefit of the Nigerian people but for the benefits of the entire world.
+                </p>
+
+                <!-- CBT Testing Image -->
+                <div class="rounded-2xl overflow-hidden shadow-md border border-slate-200 my-6">
+                    <img src="/media/banners/banner_cbt_1.jpg" alt="NSUK ODeL CBT Testing Hall" class="w-full h-64 sm:h-72 object-cover object-center">
+                    <div class="bg-slate-50 px-4 py-2.5 text-xs text-slate-500 border-t border-slate-200">
+                        <i class="fa-solid fa-laptop-code text-brand-green mr-1.5"></i> Students Writing Computer-Based Testing (CBT) Examinations at NSUK ODeL E-Testing Centre
+                    </div>
+                </div>
+
+                <!-- Paragraph 9 -->
+                <div class="p-6 rounded-2xl bg-sky-50/70 border border-sky-100 space-y-3">
+                    <h4 class="font-heading font-bold text-slate-900 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-network-wired text-brand-blue"></i> The Delivery Model & Blended Learning (IESBL)
+                    </h4>
+                    <p class="leading-relaxed">
+                        The Nasarawa State University Open and Distance Learning programme model will involve the applications of Multimedia Technologies that support electronic instructional delivery (e-learning), as well as independent learning. Physical contact will be reduced to the barest minimum. In this programme, all learning processes will be automated including application for entry, short-listing, payment, administration and lecture delivery using world-class Student Information Systems (SIS). The University will therefore operate the <strong>blended</strong> mode of Distance Learning. Specifically, this Centre for Open and Distance e-Learning will deliver selected academic programmes of the University to the global candidates and students <em>synchronously</em> or <em>asynchronously</em> through <strong>ICT-enabled supported blended learning (IESBL)</strong> model.
+                    </p>
+                </div>
+
+                <!-- Pioneer Program Callout -->
+                <div class="p-6 rounded-2xl bg-gradient-to-r from-brand-navy to-brand-blue text-white space-y-3 mt-8 shadow-lg">
+                    <span class="px-3 py-1 rounded-full bg-brand-green text-xs font-bold uppercase tracking-wider inline-block">Flagship Pioneer Programme</span>
+                    <h4 class="font-heading font-bold text-xl text-white">Bachelor of Science (B.Sc) in Public Administration</h4>
+                    <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+                        With full accreditation from the National Universities Commission (NUC), NSUK ODeL commenced academic operations with B.Sc Public Administration. Prospective programs currently being expanded include Computer Science, Business Administration, Accounting, Entrepreneurship, and Economics.
+                    </p>
+                    <div class="pt-2 flex flex-wrap gap-3">
+                        <a href="{% url 'program_detail' slug='b-sc-public-administration' %}" class="px-5 py-2.5 rounded-xl bg-white text-brand-blue font-bold text-xs hover:bg-slate-100 transition shadow">
+                            View Curriculum & Outline
+                        </a>
+                        <a href="{% url 'how_to_apply' %}" class="px-5 py-2.5 rounded-xl bg-brand-green text-white font-bold text-xs hover:bg-brand-darkgreen transition shadow">
+                            Apply for Admission
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -71,21 +146,38 @@
             <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-4">
                 <h3 class="font-heading font-bold text-slate-900 text-base border-b border-slate-100 pb-3">About the Directorate</h3>
                 <ul class="space-y-2 text-xs sm:text-sm">
-                    <li><a href="{% url 'history' %}" class="block px-3.5 py-2.5 rounded-xl bg-brand-blue text-white font-bold">ODeL History</a></li>
-                    <li><a href="{% url 'vc_message' %}" class="block px-3.5 py-2.5 rounded-xl hover:bg-slate-100 text-slate-700 font-medium transition">Vice-Chancellor's Message</a></li>
-                    <li><a href="{% url 'director_message' %}" class="block px-3.5 py-2.5 rounded-xl hover:bg-slate-100 text-slate-700 font-medium transition">Director's Welcome</a></li>
-                    <li><a href="{% url 'staff_directory' %}" class="block px-3.5 py-2.5 rounded-xl hover:bg-slate-100 text-slate-700 font-medium transition">Our Faculty & Staff</a></li>
+                    <li><a href="{% url 'history' %}" class="block px-3.5 py-2.5 rounded-xl bg-brand-blue text-white font-bold"><i class="fa-solid fa-angle-right mr-1.5 text-xs"></i> ODeL History</a></li>
+                    <li><a href="{% url 'vc_message' %}" class="block px-3.5 py-2.5 rounded-xl hover:bg-slate-100 text-slate-700 font-medium transition"><i class="fa-solid fa-angle-right mr-1.5 text-xs text-slate-400"></i> Vice-Chancellor's Message</a></li>
+                    <li><a href="{% url 'director_message' %}" class="block px-3.5 py-2.5 rounded-xl hover:bg-slate-100 text-slate-700 font-medium transition"><i class="fa-solid fa-angle-right mr-1.5 text-xs text-slate-400"></i> Director's Welcome</a></li>
+                    <li><a href="{% url 'staff_directory' %}" class="block px-3.5 py-2.5 rounded-xl hover:bg-slate-100 text-slate-700 font-medium transition"><i class="fa-solid fa-angle-right mr-1.5 text-xs text-slate-400"></i> Our Faculty & Staff</a></li>
                 </ul>
             </div>
 
             <!-- Fast Application Card -->
             <div class="rounded-3xl bg-gradient-to-br from-brand-navy to-brand-blue p-6 text-white space-y-4 shadow-lg">
                 <span class="px-2.5 py-1 rounded-full bg-brand-green text-xs font-bold uppercase">Enroll Today</span>
-                <h4 class="font-heading font-bold text-lg text-white">Join the Next Academic Session</h4>
-                <p class="text-xs text-slate-200">Admissions are currently ongoing for the 2025/2026 academic calendar.</p>
+                <h4 class="font-heading font-bold text-lg text-white">Join the Pioneer Session</h4>
+                <p class="text-xs text-slate-200">Admissions are currently ongoing for the 2025/2026 academic calendar. Study online with accredited excellence.</p>
                 <a href="{% url 'how_to_apply' %}" class="block text-center py-3 rounded-xl bg-white text-brand-blue font-bold text-xs hover:bg-slate-100 transition shadow">
-                    Apply Online Now
+                    Start Your Application Now
                 </a>
+            </div>
+
+            <!-- Quick Contacts Card -->
+            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-3 text-xs text-slate-600">
+                <h4 class="font-heading font-bold text-slate-900 text-sm border-b border-slate-100 pb-2">Direct Enquiries</h4>
+                <p class="flex items-center gap-2">
+                    <i class="fa-solid fa-envelope text-brand-green"></i>
+                    <a href="mailto:{{ settings.contact_email }}" class="hover:underline">{{ settings.contact_email }}</a>
+                </p>
+                <p class="flex items-center gap-2">
+                    <i class="fa-solid fa-phone text-brand-green"></i>
+                    <a href="tel:{{ settings.contact_phone_1 }}" class="hover:underline">{{ settings.contact_phone_1 }}</a>
+                </p>
+                <p class="flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-emerald-500"></i>
+                    <a href="https://wa.me/{{ settings.whatsapp_number }}" target="_blank" class="hover:underline">Chat on WhatsApp</a>
+                </p>
             </div>
         </div>
 

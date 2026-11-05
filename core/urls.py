@@ -1,10 +1,11 @@
 from django.urls import path
+from django.views.generic import RedirectView
 from . import views
 
 urlpatterns = [
     path('', views.index, name='home'),
     
-    # About Us subpages
+    # About Us subpages - canonical URL is /about/history/
     path('about/history/', views.history_view, name='history'),
     path('about/vice-chancellor/', views.vc_message_view, name='vc_message'),
     path('about/director/', views.director_message_view, name='director_message'),
