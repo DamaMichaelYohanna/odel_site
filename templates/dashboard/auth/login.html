@@ -1,5 +1,6 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-slate-950">
+<html lang="en" class="h-full bg-slate-50">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,9 +19,9 @@
                 extend: {
                     colors: {
                         brand: {
-                            blue: '#0092dc',
-                            navy: '#0b192c',
-                            green: '#85c226',
+                            green: '#08783f',
+                            darkgreen: '#063d24',
+                            blue: '#0284c7',
                         }
                     },
                     fontFamily: {
@@ -33,18 +34,18 @@
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body class="h-full flex items-center justify-center p-4 bg-gradient-to-br from-slate-950 via-slate-900 to-brand-navy font-sans antialiased text-slate-100">
+<body class="h-full flex items-center justify-center p-4 bg-slate-100 font-sans antialiased text-slate-800">
 
-    <div class="w-full max-w-md space-y-8 bg-slate-900/90 backdrop-blur-xl p-8 sm:p-10 rounded-3xl border border-slate-800 shadow-2xl">
+    <div class="w-full max-w-md space-y-8 bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 shadow-xl">
         
         <!-- Header & Logo -->
         <div class="text-center space-y-3">
-            <div class="w-16 h-16 rounded-2xl bg-white p-2 mx-auto shadow-lg flex items-center justify-center">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/52/Nasarawa_State_University_logo.png/220px-Nasarawa_State_University_logo.png" alt="NSUK Crest" class="w-full h-full object-contain">
+            <div class="w-20 h-20 rounded-2xl bg-slate-50 p-2 mx-auto shadow-sm border border-slate-200 flex items-center justify-center overflow-hidden">
+                <img src="{% static 'images/odel_logo.png' %}" alt="NSUK Crest" class="w-full h-full object-contain">
             </div>
             <div>
-                <h1 class="font-heading font-extrabold text-2xl text-white tracking-tight">NSUK <span class="text-brand-green">ODeL</span></h1>
-                <p class="text-xs text-slate-400 mt-0.5">Directorate Management Dashboard Login</p>
+                <h1 class="font-heading font-extrabold text-2xl text-slate-900 tracking-tight">NSUK <span class="text-[#08783f]">ODeL</span></h1>
+                <p class="text-xs text-slate-500 mt-0.5">Directorate Management Dashboard Login</p>
             </div>
         </div>
 
@@ -52,7 +53,7 @@
         {% if messages %}
         <div class="space-y-2">
             {% for message in messages %}
-            <div class="p-3.5 rounded-xl text-xs font-medium flex items-center gap-2 {% if message.tags == 'error' %}bg-rose-950/80 border border-rose-800 text-rose-200{% else %}bg-sky-950/80 border border-sky-800 text-sky-200{% endif %}">
+            <div class="p-3.5 rounded-xl text-xs font-medium flex items-center gap-2 {% if message.tags == 'error' %}bg-rose-50 border border-rose-200 text-rose-800{% else %}bg-sky-50 border border-sky-200 text-sky-800{% endif %}">
                 <i class="fa-solid fa-circle-exclamation"></i>
                 <span>{{ message }}</span>
             </div>
@@ -65,28 +66,28 @@
             {% csrf_token %}
             
             <div class="space-y-1.5">
-                <label class="block text-xs font-bold text-slate-300">Username</label>
+                <label class="block text-xs font-bold text-slate-700">Username</label>
                 <div class="relative">
                     <i class="fa-solid fa-user absolute left-4 top-3.5 text-slate-400 text-sm"></i>
-                    <input type="text" name="username" required autofocus placeholder="Admin username" class="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-xs sm:text-sm focus:border-brand-blue focus:ring-2 focus:ring-sky-500/20 outline-none transition">
+                    <input type="text" name="username" required autofocus placeholder="Admin username" class="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-xs sm:text-sm focus:bg-white focus:border-[#08783f] focus:ring-2 focus:ring-emerald-500/20 outline-none transition">
                 </div>
             </div>
 
             <div class="space-y-1.5">
-                <label class="block text-xs font-bold text-slate-300">Password</label>
+                <label class="block text-xs font-bold text-slate-700">Password</label>
                 <div class="relative">
                     <i class="fa-solid fa-lock absolute left-4 top-3.5 text-slate-400 text-sm"></i>
-                    <input type="password" name="password" required placeholder="••••••••••••" class="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white placeholder-slate-500 text-xs sm:text-sm focus:border-brand-blue focus:ring-2 focus:ring-sky-500/20 outline-none transition">
+                    <input type="password" name="password" required placeholder="••••••••••••" class="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-xs sm:text-sm focus:bg-white focus:border-[#08783f] focus:ring-2 focus:ring-emerald-500/20 outline-none transition">
                 </div>
             </div>
 
-            <button type="submit" class="w-full py-3.5 px-4 rounded-xl bg-brand-blue hover:bg-brand-darkblue text-white font-extrabold text-sm shadow-lg shadow-sky-900/40 transition flex items-center justify-center gap-2">
+            <button type="submit" class="w-full py-3.5 px-4 rounded-xl bg-[#08783f] hover:bg-[#063d24] text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2">
                 <i class="fa-solid fa-shield-halved"></i> Authenticate & Login
             </button>
         </form>
 
-        <div class="text-center pt-4 border-t border-slate-800 text-xs text-slate-500">
-            <a href="{% url 'home' %}" class="hover:text-sky-400 transition flex items-center justify-center gap-1">
+        <div class="text-center pt-4 border-t border-slate-100 text-xs text-slate-500">
+            <a href="{% url 'home' %}" class="hover:text-[#08783f] transition flex items-center justify-center gap-1">
                 <i class="fa-solid fa-arrow-left text-[10px]"></i> Return to public website
             </a>
         </div>

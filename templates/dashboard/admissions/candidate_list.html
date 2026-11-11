@@ -9,32 +9,32 @@
     <!-- Top Actions -->
     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-            <h2 class="font-heading font-extrabold text-2xl text-white">Admitted Students ({{ total_count }})</h2>
-            <p class="text-xs text-slate-400">Search, filter, add, edit, or export candidate records.</p>
+            <h2 class="font-heading font-extrabold text-2xl text-slate-900">Admitted Students ({{ total_count }})</h2>
+            <p class="text-xs text-slate-500">Search, filter, add, edit, or export candidate records.</p>
         </div>
-        <div class="flex flex-wrap items-center gap-3">
-            <a href="{% url 'dashboard_export_csv' %}{% if selected_batch_id %}?batch={{ selected_batch_id }}{% endif %}" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
-                <i class="fa-solid fa-file-export text-amber-400"></i> Export CSV
+        <div class="flex flex-wrap items-center gap-2.5">
+            <a href="{% url 'dashboard_export_csv' %}{% if selected_batch_id %}?batch={{ selected_batch_id }}{% endif %}" class="px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 border border-slate-200 shadow-sm transition flex items-center gap-1.5">
+                <i class="fa-solid fa-file-export text-slate-400"></i> Export CSV
             </a>
-            <a href="{% url 'dashboard_bulk_upload' %}" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-xs font-bold text-white shadow transition flex items-center gap-1.5">
+            <a href="{% url 'dashboard_bulk_upload' %}" class="px-4 py-2.5 rounded-xl bg-[#08783f] hover:bg-[#063d24] text-xs font-semibold text-white shadow-sm transition flex items-center gap-1.5">
                 <i class="fa-solid fa-file-csv"></i> Bulk CSV Upload
             </a>
-            <a href="{% url 'dashboard_candidate_create' %}" class="px-4 py-2.5 rounded-xl bg-brand-blue hover:bg-brand-darkblue text-xs font-bold text-white shadow transition flex items-center gap-1.5">
-                <i class="fa-solid fa-user-plus"></i> Add Single Student
+            <a href="{% url 'dashboard_candidate_create' %}" class="px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 border border-slate-200 shadow-sm transition flex items-center gap-1.5">
+                <i class="fa-solid fa-user-plus text-slate-400"></i> Add Single Student
             </a>
         </div>
     </div>
 
     <!-- Search & Filter Bar -->
-    <div class="bg-slate-800/80 rounded-3xl p-6 border border-slate-700 shadow-md">
+    <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm">
         <form method="get" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
             <div class="lg:col-span-2 relative">
                 <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-sm"></i>
-                <input type="text" name="q" value="{{ query }}" placeholder="Search Candidate Name, Applicant ID..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 text-xs sm:text-sm focus:border-brand-blue outline-none transition">
+                <input type="text" name="q" value="{{ query }}" placeholder="Search Candidate Name, Applicant ID..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-xs sm:text-sm focus:border-[#08783f] focus:bg-white focus:ring-1 focus:ring-[#08783f] outline-none transition">
             </div>
 
             <div>
-                <select name="batch" class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:border-brand-blue outline-none">
+                <select name="batch" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs sm:text-sm focus:border-[#08783f] focus:bg-white outline-none">
                     <option value="">All Batches</option>
                     {% for b in batches %}
                     <option value="{{ b.id }}" {% if selected_batch_id == b.id|stringformat:"i" %}selected{% endif %}>{{ b.title }} ({{ b.academic_session }})</option>
@@ -43,7 +43,7 @@
             </div>
 
             <div>
-                <select name="level" class="w-full px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs sm:text-sm focus:border-brand-blue outline-none">
+                <select name="level" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs sm:text-sm focus:border-[#08783f] focus:bg-white outline-none">
                     <option value="">All Entry Levels</option>
                     <option value="100" {% if selected_level == '100' %}selected{% endif %}>100 Level</option>
                     <option value="200" {% if selected_level == '200' %}selected{% endif %}>200 Level</option>
@@ -52,11 +52,11 @@
             </div>
 
             <div class="flex items-center gap-2">
-                <button type="submit" class="flex-grow px-4 py-2.5 rounded-xl bg-brand-blue hover:bg-brand-darkblue text-white font-bold text-xs sm:text-sm shadow transition">
+                <button type="submit" class="flex-grow px-4 py-2.5 rounded-xl bg-[#08783f] hover:bg-[#063d24] text-white font-semibold text-xs sm:text-sm shadow-sm transition">
                     Filter
                 </button>
                 {% if query or selected_batch_id or selected_level %}
-                <a href="{% url 'dashboard_candidates' %}" class="px-3 py-2.5 rounded-xl bg-slate-700 text-slate-300 text-xs hover:bg-slate-600 transition" title="Clear">
+                <a href="{% url 'dashboard_candidates' %}" class="px-3 py-2.5 rounded-xl bg-slate-100 text-slate-600 text-xs hover:bg-slate-200 transition" title="Clear">
                     <i class="fa-solid fa-rotate-left"></i>
                 </a>
                 {% endif %}
@@ -65,10 +65,10 @@
     </div>
 
     <!-- Candidate Records Table -->
-    <div class="bg-slate-800/80 rounded-3xl border border-slate-700 shadow-md overflow-hidden">
+    <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
         <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs text-slate-300">
-                <thead class="bg-slate-900/80 text-slate-400 uppercase tracking-wider text-[10px] border-b border-slate-700">
+            <table class="w-full text-left text-xs text-slate-700">
+                <thead class="bg-slate-50 text-slate-500 uppercase tracking-wider text-[10px] border-b border-slate-200">
                     <tr>
                         <th class="py-4 px-4 sm:px-6 w-14">S/N</th>
                         <th class="py-4 px-4 sm:px-6">Applicant ID</th>
@@ -81,31 +81,31 @@
                         <th class="py-4 px-4 sm:px-6 text-right">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-700/50 font-medium">
+                <tbody class="divide-y divide-slate-100 font-medium">
                     {% for c in page_obj %}
-                    <tr class="hover:bg-slate-750/30 transition">
-                        <td class="py-3 px-4 sm:px-6 text-slate-500 font-semibold">{{ c.serial_number|default:forloop.counter }}</td>
-                        <td class="py-3 px-4 sm:px-6 font-mono font-bold text-sky-400">{{ c.applicant_id }}</td>
-                        <td class="py-3 px-4 sm:px-6 font-bold text-white">{{ c.candidate_name }}</td>
-                        <td class="py-3 px-4 sm:px-6 text-slate-400 max-w-[200px] truncate">{{ c.program }}</td>
+                    <tr class="hover:bg-slate-50/70 transition">
+                        <td class="py-3 px-4 sm:px-6 text-slate-400 font-semibold">{{ c.serial_number|default:forloop.counter }}</td>
+                        <td class="py-3 px-4 sm:px-6 font-mono font-bold text-[#08783f]">{{ c.applicant_id }}</td>
+                        <td class="py-3 px-4 sm:px-6 font-bold text-slate-900">{{ c.candidate_name }}</td>
+                        <td class="py-3 px-4 sm:px-6 text-slate-600 max-w-[200px] truncate">{{ c.program }}</td>
                         <td class="py-3 px-4 sm:px-6 text-center">
-                            <span class="px-2 py-0.5 rounded bg-slate-900 text-slate-200 font-bold text-[10px]">{{ c.level_of_entry }}L</span>
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-bold text-[10px]">{{ c.level_of_entry }}L</span>
                         </td>
                         <td class="py-3 px-4 sm:px-6 text-center">
-                            <span class="px-2 py-0.5 rounded-full text-[10px] {% if c.gender == 'Female' %}bg-pink-950 text-pink-300 border border-pink-800{% else %}bg-blue-950 text-blue-300 border border-blue-800{% endif %}">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold {% if c.gender == 'Female' %}bg-rose-50 text-rose-700 border border-rose-200{% else %}bg-slate-100 text-slate-700 border border-slate-200{% endif %}">
                                 {{ c.gender }}
                             </span>
                         </td>
-                        <td class="py-3 px-4 sm:px-6">{{ c.state_of_origin|default:"-" }}</td>
-                        <td class="py-3 px-4 sm:px-6 text-slate-400 truncate max-w-[120px]">{{ c.batch.academic_session }}</td>
+                        <td class="py-3 px-4 sm:px-6 text-slate-600">{{ c.state_of_origin|default:"-" }}</td>
+                        <td class="py-3 px-4 sm:px-6 text-slate-500 truncate max-w-[120px]">{{ c.batch.academic_session }}</td>
                         <td class="py-3 px-4 sm:px-6 text-right space-x-2">
-                            <a href="{% url 'dashboard_candidate_edit' pk=c.pk %}" class="text-slate-400 hover:text-sky-400 transition" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="{% url 'dashboard_candidate_delete' pk=c.pk %}" class="text-slate-400 hover:text-rose-400 transition" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                            <a href="{% url 'dashboard_candidate_edit' pk=c.pk %}" class="text-slate-400 hover:text-[#08783f] transition" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="{% url 'dashboard_candidate_delete' pk=c.pk %}" class="text-slate-400 hover:text-rose-600 transition" title="Delete"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="9" class="py-12 text-center text-slate-500">
+                        <td colspan="9" class="py-12 text-center text-slate-400">
                             No candidate records found matching your filters.
                         </td>
                     </tr>
@@ -116,20 +116,20 @@
 
         <!-- Pagination -->
         {% if page_obj.has_other_pages %}
-        <div class="px-6 py-4 bg-slate-900/60 border-t border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-            <div class="text-slate-400">
-                Showing page <span class="font-bold text-white">{{ page_obj.number }}</span> of <span class="font-bold text-white">{{ page_obj.paginator.num_pages }}</span>
+        <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+            <div class="text-slate-500">
+                Showing page <span class="font-bold text-slate-900">{{ page_obj.number }}</span> of <span class="font-bold text-slate-900">{{ page_obj.paginator.num_pages }}</span>
             </div>
             
             <div class="flex items-center space-x-1">
                 {% if page_obj.has_previous %}
-                <a href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}{% if selected_batch_id %}&batch={{ selected_batch_id }}{% endif %}{% if selected_level %}&level={{ selected_level }}{% endif %}" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold">&laquo; Prev</a>
+                <a href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}{% if selected_batch_id %}&batch={{ selected_batch_id }}{% endif %}{% if selected_level %}&level={{ selected_level }}{% endif %}" class="px-3 py-1.5 rounded-lg bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 font-semibold transition">&laquo; Prev</a>
                 {% endif %}
 
-                <span class="px-3 py-1.5 rounded-lg bg-brand-blue text-white font-bold">{{ page_obj.number }}</span>
+                <span class="px-3 py-1.5 rounded-lg bg-[#08783f] text-white font-bold">{{ page_obj.number }}</span>
 
                 {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}{% if selected_batch_id %}&batch={{ selected_batch_id }}{% endif %}{% if selected_level %}&level={{ selected_level }}{% endif %}" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold">Next &raquo;</a>
+                <a href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}{% if selected_batch_id %}&batch={{ selected_batch_id }}{% endif %}{% if selected_level %}&level={{ selected_level }}{% endif %}" class="px-3 py-1.5 rounded-lg bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 font-semibold transition">Next &raquo;</a>
                 {% endif %}
             </div>
         </div>

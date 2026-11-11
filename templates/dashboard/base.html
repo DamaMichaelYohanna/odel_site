@@ -1,5 +1,6 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-slate-900">
+<html lang="en" class="h-full bg-slate-50">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,11 +20,11 @@
                 extend: {
                     colors: {
                         brand: {
-                            blue: '#0092dc',
-                            darkblue: '#006fa8',
-                            navy: '#0b192c',
-                            green: '#85c226',
-                            darkgreen: '#659918',
+                            green: '#08783f',
+                            darkgreen: '#063d24',
+                            lightgreen: '#e6f4ea',
+                            blue: '#0284c7',
+                            navy: '#0f172a',
                         }
                     },
                     fontFamily: {
@@ -43,126 +44,126 @@
     <style>
         [x-cloak] { display: none !important; }
         ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
     {% block extra_head %}{% endblock %}
 </head>
-<body class="h-full bg-slate-900 text-slate-100 font-sans antialiased flex overflow-hidden" x-data="{ sidebarOpen: false }">
+<body class="h-full bg-slate-50 text-slate-800 font-sans antialiased flex overflow-hidden" x-data="{ sidebarOpen: false }">
 
     <!-- Mobile Sidebar Backdrop -->
-    <div x-show="sidebarOpen" x-cloak @click="sidebarOpen = false" class="fixed inset-0 z-40 bg-slate-950/80 backdrop-blur-sm lg:hidden"></div>
+    <div x-show="sidebarOpen" x-cloak @click="sidebarOpen = false" class="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-sm lg:hidden"></div>
 
     <!-- SIDEBAR -->
-    <aside :class="{ 'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen }" class="fixed inset-y-0 left-0 z-50 w-72 bg-slate-950 border-r border-slate-800/80 flex flex-col justify-between transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-auto flex-shrink-0">
+    <aside :class="{ 'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen }" class="fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-slate-200 flex flex-col justify-between transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-auto flex-shrink-0 shadow-sm">
         
         <!-- Sidebar Top: Brand Logo -->
         <div>
-            <div class="h-20 flex items-center justify-between px-6 border-b border-slate-800/80 bg-slate-950/60">
+            <div class="h-20 flex items-center justify-between px-6 border-b border-slate-200 bg-white">
                 <a href="{% url 'dashboard_home' %}" class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-xl bg-white p-1 shadow flex items-center justify-center">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/52/Nasarawa_State_University_logo.png/220px-Nasarawa_State_University_logo.png" alt="NSUK" class="w-full h-full object-contain">
+                    <div class="w-10 h-10 rounded-xl bg-slate-50 p-1 border border-slate-200 shadow-sm flex items-center justify-center overflow-hidden">
+                        <img src="{% static 'images/odel_logo.png' %}" alt="NSUK ODeL" class="w-full h-full object-contain">
                     </div>
                     <div>
-                        <span class="font-heading font-extrabold text-base tracking-tight text-white block">NSUK <span class="text-brand-green">ODeL</span></span>
+                        <span class="font-heading font-extrabold text-base tracking-tight text-slate-900 block">NSUK <span class="text-[#08783f]">ODeL</span></span>
                         <span class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">Admin Panel</span>
                     </div>
                 </a>
-                <button @click="sidebarOpen = false" class="lg:hidden text-slate-400 hover:text-white p-1">
+                <button @click="sidebarOpen = false" class="lg:hidden text-slate-400 hover:text-slate-700 p-1">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
 
             <!-- Navigation Links -->
-            <nav class="px-4 py-6 space-y-1.5 overflow-y-auto max-h-[calc(100vh-160px)] text-xs font-medium">
+            <nav class="px-3 py-5 space-y-1 overflow-y-auto max-h-[calc(100vh-160px)] text-xs font-medium">
                 
-                <div class="px-3 pb-2 text-[10px] font-bold text-slate-500 uppercase tracking-wider">Main Hub</div>
+                <div class="px-3 pb-2 pt-1 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Main Hub</div>
                 
                 <!-- Dashboard Home -->
-                <a href="{% url 'dashboard_home' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if request.resolver_match.url_name == 'dashboard_home' %}bg-brand-blue text-white font-bold shadow-lg shadow-sky-900/40{% else %}text-slate-300 hover:bg-slate-900 hover:text-white{% endif %}">
-                    <i class="fa-solid fa-gauge text-sm w-5 text-center"></i>
+                <a href="{% url 'dashboard_home' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if request.resolver_match.url_name == 'dashboard_home' %}bg-emerald-50 text-[#08783f] font-semibold border-l-4 border-[#08783f]{% else %}text-slate-600 hover:bg-slate-50 hover:text-slate-900{% endif %}">
+                    <i class="fa-solid fa-gauge text-sm w-5 text-center {% if request.resolver_match.url_name == 'dashboard_home' %}text-[#08783f]{% else %}text-slate-400{% endif %}"></i>
                     <span>Dashboard Overview</span>
                 </a>
 
-                <div class="pt-4 px-3 pb-2 text-[10px] font-bold text-slate-500 uppercase tracking-wider">Admissions & Students</div>
+                <div class="pt-4 px-3 pb-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Admissions & Students</div>
 
                 <!-- Admission Batches -->
-                <a href="{% url 'dashboard_batches' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if 'admissions/batches' in request.path %}bg-brand-blue text-white font-bold{% else %}text-slate-300 hover:bg-slate-900 hover:text-white{% endif %}">
-                    <i class="fa-solid fa-folder-tree text-sm w-5 text-center text-amber-400"></i>
+                <a href="{% url 'dashboard_batches' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if 'admissions/batches' in request.path %}bg-emerald-50 text-[#08783f] font-semibold border-l-4 border-[#08783f]{% else %}text-slate-600 hover:bg-slate-50 hover:text-slate-900{% endif %}">
+                    <i class="fa-solid fa-folder-tree text-sm w-5 text-center {% if 'admissions/batches' in request.path %}text-[#08783f]{% else %}text-slate-400{% endif %}"></i>
                     <span>Admission Batches</span>
                 </a>
 
                 <!-- Admitted Candidates -->
-                <a href="{% url 'dashboard_candidates' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if 'admissions/candidates' in request.path %}bg-brand-blue text-white font-bold{% else %}text-slate-300 hover:bg-slate-900 hover:text-white{% endif %}">
-                    <i class="fa-solid fa-user-graduate text-sm w-5 text-center text-brand-green"></i>
+                <a href="{% url 'dashboard_candidates' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if 'admissions/candidates' in request.path %}bg-emerald-50 text-[#08783f] font-semibold border-l-4 border-[#08783f]{% else %}text-slate-600 hover:bg-slate-50 hover:text-slate-900{% endif %}">
+                    <i class="fa-solid fa-user-graduate text-sm w-5 text-center {% if 'admissions/candidates' in request.path %}text-[#08783f]{% else %}text-slate-400{% endif %}"></i>
                     <span>Candidate Records</span>
                 </a>
 
                 <!-- Bulk CSV Importer -->
-                <a href="{% url 'dashboard_bulk_upload' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if 'bulk-upload' in request.path %}bg-brand-blue text-white font-bold{% else %}text-slate-300 hover:bg-slate-900 hover:text-white{% endif %}">
-                    <i class="fa-solid fa-file-csv text-sm w-5 text-center text-emerald-400"></i>
+                <a href="{% url 'dashboard_bulk_upload' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if 'bulk-upload' in request.path %}bg-emerald-50 text-[#08783f] font-semibold border-l-4 border-[#08783f]{% else %}text-slate-600 hover:bg-slate-50 hover:text-slate-900{% endif %}">
+                    <i class="fa-solid fa-file-csv text-sm w-5 text-center {% if 'bulk-upload' in request.path %}text-[#08783f]{% else %}text-slate-400{% endif %}"></i>
                     <span>Bulk CSV Importer</span>
                 </a>
 
-                <div class="pt-4 px-3 pb-2 text-[10px] font-bold text-slate-500 uppercase tracking-wider">Academic Catalog</div>
+                <div class="pt-4 px-3 pb-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Academic Catalog</div>
 
                 <!-- Programs -->
-                <a href="{% url 'dashboard_programs' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if 'programs' in request.path %}bg-brand-blue text-white font-bold{% else %}text-slate-300 hover:bg-slate-900 hover:text-white{% endif %}">
-                    <i class="fa-solid fa-award text-sm w-5 text-center text-sky-400"></i>
+                <a href="{% url 'dashboard_programs' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if 'programs' in request.path %}bg-emerald-50 text-[#08783f] font-semibold border-l-4 border-[#08783f]{% else %}text-slate-600 hover:bg-slate-50 hover:text-slate-900{% endif %}">
+                    <i class="fa-solid fa-award text-sm w-5 text-center {% if 'programs' in request.path %}text-[#08783f]{% else %}text-slate-400{% endif %}"></i>
                     <span>Academic Programs</span>
                 </a>
 
                 <!-- Courses -->
-                <a href="{% url 'dashboard_courses' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if 'courses' in request.path %}bg-brand-blue text-white font-bold{% else %}text-slate-300 hover:bg-slate-900 hover:text-white{% endif %}">
-                    <i class="fa-solid fa-book-open text-sm w-5 text-center text-indigo-400"></i>
+                <a href="{% url 'dashboard_courses' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if 'courses' in request.path %}bg-emerald-50 text-[#08783f] font-semibold border-l-4 border-[#08783f]{% else %}text-slate-600 hover:bg-slate-50 hover:text-slate-900{% endif %}">
+                    <i class="fa-solid fa-book-open text-sm w-5 text-center {% if 'courses' in request.path %}text-[#08783f]{% else %}text-slate-400{% endif %}"></i>
                     <span>Courses Directory</span>
                 </a>
 
-                <div class="pt-4 px-3 pb-2 text-[10px] font-bold text-slate-500 uppercase tracking-wider">Content & Engagement</div>
+                <div class="pt-4 px-3 pb-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Content & Engagement</div>
 
                 <!-- News & Events -->
-                <a href="{% url 'dashboard_news' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if 'news' in request.path %}bg-brand-blue text-white font-bold{% else %}text-slate-300 hover:bg-slate-900 hover:text-white{% endif %}">
-                    <i class="fa-solid fa-newspaper text-sm w-5 text-center text-rose-400"></i>
+                <a href="{% url 'dashboard_news' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if 'news' in request.path %}bg-emerald-50 text-[#08783f] font-semibold border-l-4 border-[#08783f]{% else %}text-slate-600 hover:bg-slate-50 hover:text-slate-900{% endif %}">
+                    <i class="fa-solid fa-newspaper text-sm w-5 text-center {% if 'news' in request.path %}text-[#08783f]{% else %}text-slate-400{% endif %}"></i>
                     <span>News & Events</span>
                 </a>
 
                 <!-- Staff Directory -->
-                <a href="{% url 'dashboard_staff' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if 'staff' in request.path %}bg-brand-blue text-white font-bold{% else %}text-slate-300 hover:bg-slate-900 hover:text-white{% endif %}">
-                    <i class="fa-solid fa-user-tie text-sm w-5 text-center text-teal-400"></i>
+                <a href="{% url 'dashboard_staff' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if 'staff' in request.path %}bg-emerald-50 text-[#08783f] font-semibold border-l-4 border-[#08783f]{% else %}text-slate-600 hover:bg-slate-50 hover:text-slate-900{% endif %}">
+                    <i class="fa-solid fa-user-tie text-sm w-5 text-center {% if 'staff' in request.path %}text-[#08783f]{% else %}text-slate-400{% endif %}"></i>
                     <span>Staff Directory</span>
                 </a>
 
                 <!-- Hero Slides -->
-                <a href="{% url 'dashboard_slides' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if 'slides' in request.path %}bg-brand-blue text-white font-bold{% else %}text-slate-300 hover:bg-slate-900 hover:text-white{% endif %}">
-                    <i class="fa-solid fa-images text-sm w-5 text-center text-yellow-400"></i>
+                <a href="{% url 'dashboard_slides' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if 'slides' in request.path %}bg-emerald-50 text-[#08783f] font-semibold border-l-4 border-[#08783f]{% else %}text-slate-600 hover:bg-slate-50 hover:text-slate-900{% endif %}">
+                    <i class="fa-solid fa-images text-sm w-5 text-center {% if 'slides' in request.path %}text-[#08783f]{% else %}text-slate-400{% endif %}"></i>
                     <span>Hero Sliders</span>
                 </a>
 
                 <!-- FAQs -->
-                <a href="{% url 'dashboard_faqs' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if 'faqs' in request.path %}bg-brand-blue text-white font-bold{% else %}text-slate-300 hover:bg-slate-900 hover:text-white{% endif %}">
-                    <i class="fa-solid fa-circle-question text-sm w-5 text-center text-cyan-400"></i>
+                <a href="{% url 'dashboard_faqs' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if 'faqs' in request.path %}bg-emerald-50 text-[#08783f] font-semibold border-l-4 border-[#08783f]{% else %}text-slate-600 hover:bg-slate-50 hover:text-slate-900{% endif %}">
+                    <i class="fa-solid fa-circle-question text-sm w-5 text-center {% if 'faqs' in request.path %}text-[#08783f]{% else %}text-slate-400{% endif %}"></i>
                     <span>FAQs Manager</span>
                 </a>
 
                 <!-- Inquiries Inbox -->
-                <a href="{% url 'dashboard_inquiries' %}" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-all {% if 'inquiries' in request.path %}bg-brand-blue text-white font-bold{% else %}text-slate-300 hover:bg-slate-900 hover:text-white{% endif %}">
+                <a href="{% url 'dashboard_inquiries' %}" class="flex items-center justify-between px-3.5 py-2.5 rounded-xl transition-all {% if 'inquiries' in request.path %}bg-emerald-50 text-[#08783f] font-semibold border-l-4 border-[#08783f]{% else %}text-slate-600 hover:bg-slate-50 hover:text-slate-900{% endif %}">
                     <div class="flex items-center space-x-3">
-                        <i class="fa-solid fa-inbox text-sm w-5 text-center text-orange-400"></i>
+                        <i class="fa-solid fa-inbox text-sm w-5 text-center {% if 'inquiries' in request.path %}text-[#08783f]{% else %}text-slate-400{% endif %}"></i>
                         <span>Inquiries Leads</span>
                     </div>
                     {% if unread_inquiries_count > 0 %}
-                    <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-rose-500 text-white">
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-[#08783f] text-white">
                         {{ unread_inquiries_count }}
                     </span>
                     {% endif %}
                 </a>
 
-                <div class="pt-4 px-3 pb-2 text-[10px] font-bold text-slate-500 uppercase tracking-wider">System</div>
+                <div class="pt-4 px-3 pb-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">System</div>
 
                 <!-- Site Settings -->
-                <a href="{% url 'dashboard_settings' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if 'settings' in request.path %}bg-brand-blue text-white font-bold{% else %}text-slate-300 hover:bg-slate-900 hover:text-white{% endif %}">
-                    <i class="fa-solid fa-sliders text-sm w-5 text-center text-slate-400"></i>
+                <a href="{% url 'dashboard_settings' %}" class="flex items-center space-x-3 px-3.5 py-2.5 rounded-xl transition-all {% if 'settings' in request.path %}bg-emerald-50 text-[#08783f] font-semibold border-l-4 border-[#08783f]{% else %}text-slate-600 hover:bg-slate-50 hover:text-slate-900{% endif %}">
+                    <i class="fa-solid fa-sliders text-sm w-5 text-center {% if 'settings' in request.path %}text-[#08783f]{% else %}text-slate-400{% endif %}"></i>
                     <span>Portal Settings</span>
                 </a>
 
@@ -170,18 +171,18 @@
         </div>
 
         <!-- Sidebar Bottom User Card -->
-        <div class="p-4 border-t border-slate-800/80 bg-slate-950/80">
+        <div class="p-4 border-t border-slate-200 bg-slate-50/70">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-3 truncate">
-                    <div class="w-9 h-9 rounded-xl bg-brand-blue text-white font-bold text-xs flex items-center justify-center uppercase">
+                    <div class="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200 text-[#08783f] font-bold text-xs flex items-center justify-center uppercase">
                         {{ request.user.username|slice:":2" }}
                     </div>
                     <div class="truncate">
-                        <span class="block text-xs font-bold text-white truncate">{{ request.user.get_full_name|default:request.user.username }}</span>
-                        <span class="block text-[10px] text-slate-400">Administrator</span>
+                        <span class="block text-xs font-bold text-slate-800 truncate">{{ request.user.get_full_name|default:request.user.username }}</span>
+                        <span class="block text-[10px] text-slate-500">Administrator</span>
                     </div>
                 </div>
-                <a href="{% url 'dashboard_logout' %}" class="text-slate-400 hover:text-rose-400 p-1.5 transition" title="Logout">
+                <a href="{% url 'dashboard_logout' %}" class="text-slate-400 hover:text-rose-600 p-1.5 transition" title="Logout">
                     <i class="fa-solid fa-right-from-bracket text-sm"></i>
                 </a>
             </div>
@@ -190,16 +191,16 @@
     </aside>
 
     <!-- MAIN DASHBOARD CONTENT AREA -->
-    <div class="flex-1 flex flex-col min-w-0 overflow-hidden bg-slate-900">
+    <div class="flex-1 flex flex-col min-w-0 overflow-hidden bg-slate-50">
         
         <!-- Top Navbar -->
-        <header class="h-20 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80 flex items-center justify-between px-4 sm:px-8 z-30">
+        <header class="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-4 sm:px-8 z-30 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
             <div class="flex items-center space-x-4">
-                <button @click="sidebarOpen = true" class="lg:hidden p-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white">
+                <button @click="sidebarOpen = true" class="lg:hidden p-2 rounded-xl bg-slate-100 text-slate-600 hover:text-slate-900 border border-slate-200">
                     <i class="fa-solid fa-bars text-lg"></i>
                 </button>
                 <div class="hidden sm:block">
-                    <h1 class="font-heading font-bold text-base sm:text-lg text-white">
+                    <h1 class="font-heading font-bold text-base sm:text-lg text-slate-900">
                         {% block header_title %}ODeL Administration & Management{% endblock %}
                     </h1>
                 </div>
@@ -209,18 +210,18 @@
             <div class="flex items-center space-x-3">
                 
                 <!-- View Public Website Button -->
-                <a href="{% url 'home' %}" target="_blank" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-sky-300 transition flex items-center gap-1.5 border border-slate-700">
-                    <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+                <a href="{% url 'home' %}" target="_blank" class="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 transition flex items-center gap-1.5 border border-slate-200 shadow-sm">
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[11px] text-slate-400"></i>
                     <span class="hidden sm:inline">Live Website</span>
                 </a>
 
                 <!-- Quick User Dropdown -->
                 <div class="relative" x-data="{ open: false }" @click.outside="open = false">
-                    <button @click="open = !open" class="flex items-center space-x-2 p-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-xs font-medium focus:outline-none">
-                        <div class="w-7 h-7 rounded-lg bg-brand-green text-white font-bold flex items-center justify-center uppercase text-xs">
+                    <button @click="open = !open" class="flex items-center space-x-2 p-1.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 shadow-sm text-xs font-medium focus:outline-none">
+                        <div class="w-7 h-7 rounded-lg bg-emerald-50 border border-emerald-200 text-[#08783f] font-bold flex items-center justify-center uppercase text-xs">
                             {{ request.user.username|slice:":1" }}
                         </div>
-                        <span class="text-slate-200 hidden md:inline">{{ request.user.username }}</span>
+                        <span class="text-slate-700 hidden md:inline font-medium">{{ request.user.username }}</span>
                         <i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
                     </button>
 
@@ -228,19 +229,19 @@
                          x-transition:enter="transition ease-out duration-100"
                          x-transition:enter-start="opacity-0 scale-95"
                          x-transition:enter-end="opacity-100 scale-100"
-                         class="absolute right-0 mt-2 w-52 rounded-2xl bg-slate-800 border border-slate-700 shadow-2xl py-2 text-slate-200 z-50 text-xs">
-                        <div class="px-4 py-2 border-b border-slate-700">
-                            <span class="block font-bold text-white">{{ request.user.username }}</span>
-                            <span class="block text-[11px] text-slate-400 truncate">{{ request.user.email|default:"ODeL Admin Staff" }}</span>
+                         class="absolute right-0 mt-2 w-52 rounded-2xl bg-white border border-slate-200 shadow-xl py-2 text-slate-700 z-50 text-xs">
+                        <div class="px-4 py-2 border-b border-slate-100">
+                            <span class="block font-bold text-slate-900">{{ request.user.username }}</span>
+                            <span class="block text-[11px] text-slate-500 truncate">{{ request.user.email|default:"ODeL Admin Staff" }}</span>
                         </div>
-                        <a href="{% url 'dashboard_change_password' %}" class="block px-4 py-2.5 hover:bg-slate-700 text-slate-200 transition">
-                            <i class="fa-solid fa-key mr-2 text-amber-400"></i> Change Password
+                        <a href="{% url 'dashboard_change_password' %}" class="block px-4 py-2.5 hover:bg-slate-50 text-slate-700 transition">
+                            <i class="fa-solid fa-key mr-2 text-slate-400"></i> Change Password
                         </a>
-                        <a href="{% url 'dashboard_settings' %}" class="block px-4 py-2.5 hover:bg-slate-700 text-slate-200 transition">
-                            <i class="fa-solid fa-sliders mr-2 text-sky-400"></i> Portal Settings
+                        <a href="{% url 'dashboard_settings' %}" class="block px-4 py-2.5 hover:bg-slate-50 text-slate-700 transition">
+                            <i class="fa-solid fa-sliders mr-2 text-slate-400"></i> Portal Settings
                         </a>
-                        <div class="border-t border-slate-700 my-1"></div>
-                        <a href="{% url 'dashboard_logout' %}" class="block px-4 py-2.5 hover:bg-rose-900/30 text-rose-300 transition font-bold">
+                        <div class="border-t border-slate-100 my-1"></div>
+                        <a href="{% url 'dashboard_logout' %}" class="block px-4 py-2.5 hover:bg-rose-50 text-rose-600 transition font-bold">
                             <i class="fa-solid fa-right-from-bracket mr-2"></i> Log Out
                         </a>
                     </div>
@@ -250,18 +251,18 @@
         </header>
 
         <!-- Main Body Viewport -->
-        <main class="flex-1 overflow-y-auto p-4 sm:p-8 bg-slate-900">
+        <main class="flex-1 overflow-y-auto p-4 sm:p-8 bg-slate-50">
             
             <!-- Toast alerts in Dashboard -->
             {% if messages %}
             <div class="mb-6 space-y-2">
                 {% for message in messages %}
-                <div class="p-4 rounded-2xl text-xs sm:text-sm font-medium flex items-center justify-between shadow-lg {% if message.tags == 'error' %}bg-rose-950/80 border border-rose-800 text-rose-200{% elif message.tags == 'success' %}bg-emerald-950/80 border border-emerald-800 text-emerald-200{% else %}bg-sky-950/80 border border-sky-800 text-sky-200{% endif %}">
+                <div class="p-4 rounded-2xl text-xs sm:text-sm font-medium flex items-center justify-between shadow-sm {% if message.tags == 'error' %}bg-rose-50 border border-rose-200 text-rose-800{% elif message.tags == 'success' %}bg-emerald-50 border border-emerald-200 text-emerald-800{% else %}bg-sky-50 border border-sky-200 text-sky-800{% endif %}">
                     <div class="flex items-center space-x-3">
-                        <i class="fa-solid {% if message.tags == 'error' %}fa-circle-xmark text-rose-400{% elif message.tags == 'success' %}fa-circle-check text-emerald-400{% else %}fa-circle-info text-sky-400{% endif %} text-base"></i>
+                        <i class="fa-solid {% if message.tags == 'error' %}fa-circle-xmark text-rose-500{% elif message.tags == 'success' %}fa-circle-check text-emerald-600{% else %}fa-circle-info text-sky-500{% endif %} text-base"></i>
                         <span>{{ message }}</span>
                     </div>
-                    <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-white">
+                    <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-slate-600">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>

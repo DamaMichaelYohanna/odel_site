@@ -4,11 +4,11 @@ from core.models import (
     StaffMember, NewsEvent, HeroSlide, FAQ, SiteSetting, InquiryMessage
 )
 
-TAILWIND_INPUT = 'w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all outline-none text-sm'
-TAILWIND_SELECT = 'w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all outline-none text-sm'
-TAILWIND_TEXTAREA = 'w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all outline-none text-sm'
-TAILWIND_CHECKBOX = 'h-5 w-5 text-sky-600 focus:ring-sky-500 border-slate-300 rounded'
-TAILWIND_FILE = 'w-full text-sm text-slate-500 dark:text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-sky-50 file:text-sky-700 hover:file:bg-sky-100'
+TAILWIND_INPUT = 'w-full px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-900 focus:ring-2 focus:ring-[#08783f]/20 focus:border-[#08783f] transition-all outline-none text-sm shadow-sm'
+TAILWIND_SELECT = 'w-full px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-900 focus:ring-2 focus:ring-[#08783f]/20 focus:border-[#08783f] transition-all outline-none text-sm shadow-sm'
+TAILWIND_TEXTAREA = 'w-full px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-900 focus:ring-2 focus:ring-[#08783f]/20 focus:border-[#08783f] transition-all outline-none text-sm shadow-sm'
+TAILWIND_CHECKBOX = 'h-5 w-5 text-[#08783f] focus:ring-[#08783f] border-slate-300 rounded'
+TAILWIND_FILE = 'w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border file:border-slate-200 file:text-sm file:font-semibold file:bg-slate-50 file:text-slate-700 hover:file:bg-emerald-50 hover:file:text-[#08783f]'
 
 
 class ProgramForm(forms.ModelForm):

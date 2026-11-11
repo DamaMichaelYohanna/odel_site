@@ -5,29 +5,29 @@
 
 {% block content %}
 <div class="max-w-xl mx-auto py-12">
-    <div class="bg-slate-800 rounded-3xl p-8 border border-rose-900/50 shadow-2xl space-y-6 text-center">
+    <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-6 text-center">
         
-        <div class="w-16 h-16 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center text-2xl mx-auto">
+        <div class="w-16 h-16 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center text-2xl mx-auto border border-rose-200">
             <i class="fa-solid fa-triangle-exclamation"></i>
         </div>
 
         <div class="space-y-2">
-            <h2 class="font-heading font-extrabold text-2xl text-white">Are you absolutely sure?</h2>
-            <p class="text-xs sm:text-sm text-slate-300">
+            <h2 class="font-heading font-extrabold text-2xl text-slate-900">Are you absolutely sure?</h2>
+            <p class="text-xs sm:text-sm text-slate-500">
                 You are about to permanently delete:
             </p>
-            <p class="font-mono font-bold text-sm text-rose-300 bg-rose-950/60 py-2 px-4 rounded-xl border border-rose-800/60 inline-block">
+            <p class="font-mono font-bold text-sm text-rose-700 bg-rose-50 py-2 px-4 rounded-xl border border-rose-200 inline-block">
                 {{ object_name }}
             </p>
             <p class="text-xs text-slate-400">This action cannot be undone.</p>
         </div>
 
-        <form method="post" class="flex items-center justify-center gap-4 pt-4 border-t border-slate-700">
+        <form method="post" class="flex items-center justify-center gap-4 pt-4 border-t border-slate-100">
             {% csrf_token %}
-            <a href="{{ cancel_url }}" class="px-6 py-3 rounded-xl bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold text-xs transition">
+            <a href="{{ cancel_url }}" class="px-6 py-2.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-semibold text-xs transition">
                 Cancel
             </a>
-            <button type="submit" class="px-6 py-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs shadow-lg transition flex items-center gap-2">
+            <button type="submit" class="px-6 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs shadow-sm transition flex items-center gap-2">
                 <i class="fa-solid fa-trash"></i> Yes, Permanently Delete
             </button>
         </form>
