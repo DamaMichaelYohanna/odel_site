@@ -3,49 +3,86 @@
 {% block title %}Nasarawa State University, Keffi – Open Distance eLearning Centre (ODeL){% endblock %}
 
 {% block content %}
-<!-- 1. HERO SLIDER BANNER SECTION -->
-<section class="relative bg-slate-900 text-white overflow-hidden">
-    <div class="swiper heroSwiper w-full h-[520px] sm:h-[580px] lg:h-[620px]">
+<!-- Custom Styles for NSUK Flagship Hero Carousel -->
+<style>
+    /* NSUK Signature Dual-Layer Atmospheric University Gradient */
+    .nsuk-hero-gradient {
+        background: 
+            linear-gradient(90deg, rgba(2, 28, 18, 0.95) 0%, rgba(2, 28, 18, 0.88) 38%, rgba(2, 28, 18, 0.55) 70%, rgba(2, 28, 18, 0.32) 100%),
+            linear-gradient(0deg, rgba(2, 20, 14, 0.85) 0%, transparent 45%);
+    }
+
+    /* Architectural Subtle Tech Grid Pattern (Matches nsuk.edu.ng hero__pattern) */
+    .nsuk-grid-pattern {
+        background-image: 
+            linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+        background-size: 52px 52px;
+        mask-image: radial-gradient(ellipse at 85% 50%, rgba(0,0,0,0.85) 0%, transparent 75%);
+        -webkit-mask-image: radial-gradient(ellipse at 85% 50%, rgba(0,0,0,0.85) 0%, transparent 75%);
+    }
+
+    /* Ken Burns Subtle Zoom on Active Slide (Mirroring nsuk.edu.ng) */
+    .hero-slide-img {
+        transform: scale(1.05);
+        transition: transform 7s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .swiper-slide-active .hero-slide-img {
+        transform: scale(1);
+    }
+</style>
+
+<!-- 1. HERO SLIDER BANNER SECTION (Mirroring https://nsuk.edu.ng/ flagship hero slideshow) -->
+<section class="relative bg-[#021810] text-white overflow-hidden min-h-[620px] sm:min-h-[680px] lg:min-h-[740px] flex flex-col justify-between">
+    
+    <!-- Hero Swiper Container -->
+    <div class="swiper heroSwiper absolute inset-0 w-full h-full z-0">
         <div class="swiper-wrapper">
             {% if slides %}
                 {% for slide in slides %}
-                <div class="swiper-slide relative flex items-center justify-center">
-                    <!-- Slide Background Image -->
-                    <img src="{{ slide.get_image_url }}" alt="{{ slide.title }}" class="absolute inset-0 w-full h-full object-cover object-top sm:object-center transition-transform duration-1000">
-                    <!-- Overlay -->
-                    <div class="absolute inset-0 bg-gradient-to-r from-brand-navy/95 via-brand-navy/80 sm:via-brand-navy/60 to-brand-navy/40 sm:to-transparent"></div>
+                <div class="swiper-slide relative flex flex-col justify-between overflow-hidden" data-slide-title="{{ slide.title }}">
+                    <!-- Background Image with Ken Burns smooth zoom -->
+                    <img src="{{ slide.get_image_url }}" alt="{{ slide.title }}" class="hero-slide-img absolute inset-0 w-full h-full object-cover object-top sm:object-center" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
                     
-                    <!-- Content Container -->
-                    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 z-10">
-                        <div class="max-w-2xl space-y-5">
-                            {% if slide.badge_text %}
-                            <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-brand-green/90 text-white text-xs sm:text-sm font-bold shadow-md uppercase tracking-wider backdrop-blur-sm">
-                                <i class="fa-solid fa-certificate text-amber-300"></i>
-                                <span>{{ slide.badge_text }}</span>
+                    <!-- NSUK Dual-Layer Gradient Overlay -->
+                    <div class="absolute inset-0 nsuk-hero-gradient pointer-events-none z-[1]"></div>
+
+                    <!-- Slide Content -->
+                    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-16 sm:pt-20 lg:pt-28 pb-16 flex-grow flex items-center">
+                        <div class="max-w-3xl space-y-6">
+                            <!-- Eyebrow / Kicker -->
+                            <div class="inline-flex items-center gap-3">
+                                <span class="w-7 sm:w-9 h-0.5 bg-amber-400 rounded-full inline-block shadow-sm"></span>
+                                <span class="text-xs sm:text-sm font-bold tracking-[0.2em] uppercase text-amber-300 drop-shadow">
+                                    {{ slide.badge_text|default:"Knowledge for Development • NSUK ODeL" }}
+                                </span>
                             </div>
-                            {% endif %}
-                            
-                            <h1 class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight text-white drop-shadow-md">
+
+                            <!-- Editorial Title -->
+                            <h1 class="font-heading font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-[1.12] drop-shadow-lg">
                                 {{ slide.title }}
                             </h1>
-                            
+
+                            <!-- Subtitle -->
                             {% if slide.subtitle %}
-                            <p class="text-base sm:text-lg text-slate-200 font-light leading-relaxed drop-shadow">
+                            <p class="text-base sm:text-lg text-slate-200/90 font-normal leading-relaxed max-w-2xl drop-shadow">
                                 {{ slide.subtitle }}
                             </p>
                             {% endif %}
-                            
-                            <div class="pt-2 flex flex-wrap items-center gap-3.5">
+
+                            <!-- Dual Action Buttons -->
+                            <div class="pt-2 flex flex-wrap items-center gap-4">
                                 {% if slide.cta_primary_text %}
-                                <a href="{{ slide.cta_primary_url }}" class="px-6 py-3.5 rounded-xl bg-brand-blue hover:bg-brand-darkblue text-white font-bold text-sm sm:text-base shadow-xl hover:shadow-cyan-500/25 transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                                <a href="{{ slide.cta_primary_url }}" class="px-7 py-3.5 sm:py-4 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-sm sm:text-base shadow-xl hover:shadow-amber-400/30 transition-all duration-200 transform hover:-translate-y-0.5 inline-flex items-center gap-2.5">
                                     <span>{{ slide.cta_primary_text }}</span>
-                                    <i class="fa-solid fa-arrow-right"></i>
+                                    <i class="fa-solid fa-arrow-up-right text-xs"></i>
                                 </a>
                                 {% endif %}
-                                
+
                                 {% if slide.cta_secondary_text %}
-                                <a href="{{ slide.cta_secondary_url }}" class="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-md font-bold text-sm sm:text-base transition-all flex items-center gap-2">
+                                <a href="{{ slide.cta_secondary_url }}" class="px-7 py-3.5 sm:py-4 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/35 backdrop-blur-md font-semibold text-sm sm:text-base transition-all duration-200 inline-flex items-center gap-2.5">
                                     <span>{{ slide.cta_secondary_text }}</span>
+                                    <i class="fa-solid fa-arrow-right text-xs"></i>
                                 </a>
                                 {% endif %}
                             </div>
@@ -55,37 +92,105 @@
                 {% endfor %}
             {% else %}
                 <!-- Default Fallback Slide -->
-                <div class="swiper-slide relative flex items-center justify-center">
-                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80" class="absolute inset-0 w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-r from-brand-navy/95 via-brand-navy/70 to-transparent"></div>
-                    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 z-10">
-                        <div class="max-w-2xl space-y-4">
-                            <span class="inline-block px-3 py-1 rounded-full bg-brand-green text-white text-xs font-bold uppercase tracking-wider">NUC Approved Centre</span>
-                            <h1 class="font-heading font-extrabold text-3xl sm:text-5xl leading-tight text-white">
+                <div class="swiper-slide relative flex flex-col justify-between overflow-hidden" data-slide-title="Flexible Higher Education for Tomorrow's Leaders">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80" class="hero-slide-img absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 nsuk-hero-gradient pointer-events-none z-[1]"></div>
+                    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-16 sm:pt-20 lg:pt-28 pb-16 flex-grow flex items-center">
+                        <div class="max-w-3xl space-y-6">
+                            <div class="inline-flex items-center gap-3">
+                                <span class="w-7 sm:w-9 h-0.5 bg-amber-400 rounded-full inline-block shadow-sm"></span>
+                                <span class="text-xs sm:text-sm font-bold tracking-[0.2em] uppercase text-amber-300 drop-shadow">Knowledge for Development • NUC Approved</span>
+                            </div>
+                            <h1 class="font-heading font-extrabold text-3xl sm:text-5xl lg:text-6xl leading-[1.12] text-white drop-shadow-lg">
                                 Flexible Higher Education for Tomorrow's Leaders
                             </h1>
-                            <p class="text-slate-200 text-base sm:text-lg">
+                            <p class="text-base sm:text-lg text-slate-200/90 font-normal leading-relaxed max-w-2xl drop-shadow">
                                 Study from anywhere with accredited degree programs from Nasarawa State University, Keffi.
                             </p>
-                            <div class="pt-2 flex items-center gap-3">
-                                <a href="{% url 'how_to_apply' %}" class="px-6 py-3.5 rounded-xl bg-brand-green font-bold text-white shadow-lg hover:bg-brand-darkgreen transition">Apply Now</a>
-                                <a href="{% url 'admission_list' %}" class="px-6 py-3.5 rounded-xl bg-white/10 border border-white/30 text-white font-bold hover:bg-white/20 transition">Check Admission</a>
+                            <div class="pt-2 flex flex-wrap items-center gap-4">
+                                <a href="{% url 'how_to_apply' %}" class="px-7 py-4 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-sm sm:text-base shadow-xl transition-all duration-200 inline-flex items-center gap-2.5">
+                                    <span>Apply to NSUK ODeL</span>
+                                    <i class="fa-solid fa-arrow-up-right text-xs"></i>
+                                </a>
+                                <a href="{% url 'admission_list' %}" class="px-7 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/35 backdrop-blur-md font-semibold text-sm sm:text-base transition-all duration-200 inline-flex items-center gap-2.5">
+                                    <span>Check Admission List</span>
+                                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             {% endif %}
         </div>
-        
-        <!-- Swiper Nav Buttons -->
-        <div class="swiper-button-next text-white hover:text-amber-300 transition after:text-xl"></div>
-        <div class="swiper-button-prev text-white hover:text-amber-300 transition after:text-xl"></div>
-        <div class="swiper-pagination"></div>
     </div>
+
+    <!-- Architectural Grid Pattern Overlay (nsuk.edu.ng hero__pattern) -->
+    <div class="absolute inset-0 nsuk-grid-pattern pointer-events-none z-[2]"></div>
+
+    <!-- Floating Glassmorphic Carousel Chrome Controls (hero-carousel__chrome) -->
+    <div class="relative sm:absolute sm:bottom-20 sm:right-6 lg:right-12 z-20 max-w-7xl mx-auto px-4 sm:px-0 w-full sm:w-auto flex flex-col items-start sm:items-end gap-3 pb-6 sm:pb-0 pointer-events-auto">
+        <!-- Status Indicator: Slide Number & Preview Label -->
+        <div class="flex items-center sm:items-end flex-row sm:flex-col gap-2 sm:gap-1 text-left sm:text-right">
+            <span id="hero-slide-counter" class="text-xs font-mono font-bold tracking-widest text-amber-300/90 bg-black/40 px-2.5 py-1 rounded-md backdrop-blur-sm border border-white/10 shadow-sm">
+                01 / {{ slides|length|stringformat:"02d"|default:"01" }}
+            </span>
+            <strong id="hero-slide-preview" class="text-[11px] font-bold uppercase tracking-wider text-slate-300 max-w-[260px] truncate hidden sm:block drop-shadow">
+                {{ slides.0.title }}
+            </strong>
+        </div>
+
+        <!-- Glass Actions Dock -->
+        <div class="backdrop-blur-md bg-slate-950/80 border border-white/20 rounded-full px-2 py-1.5 flex items-center gap-1.5 shadow-2xl">
+            <!-- Prev Button -->
+            <button id="hero-btn-prev" type="button" aria-label="Previous slide" class="w-9 h-9 rounded-full flex items-center justify-center hover:bg-white/15 text-white/90 hover:text-white transition">
+                <i class="fa-solid fa-chevron-left text-xs"></i>
+            </button>
+
+            <!-- Dynamic Dots Container -->
+            <div id="hero-dots-container" class="flex items-center gap-1.5 px-2" role="tablist">
+                <!-- Dynamically populated by JS -->
+            </div>
+
+            <!-- Next Button -->
+            <button id="hero-btn-next" type="button" aria-label="Next slide" class="w-9 h-9 rounded-full flex items-center justify-center hover:bg-white/15 text-white/90 hover:text-white transition">
+                <i class="fa-solid fa-chevron-right text-xs"></i>
+            </button>
+
+            <!-- Divider -->
+            <span class="h-4 w-px bg-white/25 mx-0.5"></span>
+
+            <!-- Autoplay Play/Pause Toggle -->
+            <button id="hero-btn-pause" type="button" aria-label="Pause slideshow" class="w-9 h-9 rounded-full flex items-center justify-center hover:bg-white/15 text-white/90 hover:text-white transition">
+                <i id="hero-pause-icon" class="fa-solid fa-pause text-xs"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Institutional Footnote Bar (hero__footnote) -->
+    <div class="relative z-20 border-t border-white/15 bg-slate-950/60 backdrop-blur-md py-3.5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs tracking-wider text-slate-300 uppercase font-medium">
+            <div class="flex items-center gap-2.5">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span class="text-slate-300 font-semibold tracking-widest text-[11px] sm:text-xs">Scroll to discover NSUK ODeL</span>
+                <i class="fa-solid fa-arrow-down text-[10px] text-amber-300 animate-bounce ml-1"></i>
+            </div>
+            <div class="flex items-center gap-3 text-slate-400 text-[11px] sm:text-xs font-mono">
+                <span>08.51° N · 07.87° E</span>
+                <span>•</span>
+                <span>Main Campus, Keffi</span>
+                <span class="hidden md:inline">•</span>
+                <span class="hidden md:inline text-amber-300/80">Directorate of ODeL</span>
+            </div>
+        </div>
+    </div>
+
 </section>
 
 <!-- 2. QUICK ACCESS CARDS (Mirroring the 6 Elementor Action Boxes from Original Site) -->
-<section class="relative -mt-10 z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section class="relative -mt-8 z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
         
         <!-- 1. Apply Now -->
@@ -572,25 +677,109 @@
 {% block extra_js %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        const slideElements = document.querySelectorAll('.heroSwiper .swiper-slide:not(.swiper-slide-duplicate)');
+        const totalSlides = slideElements.length;
+        if (totalSlides === 0) return;
+
+        const counterEl = document.getElementById('hero-slide-counter');
+        const previewEl = document.getElementById('hero-slide-preview');
+        const dotsContainer = document.getElementById('hero-dots-container');
+        const prevBtn = document.getElementById('hero-btn-prev');
+        const nextBtn = document.getElementById('hero-btn-next');
+        const pauseBtn = document.getElementById('hero-btn-pause');
+        const pauseIcon = document.getElementById('hero-pause-icon');
+
+        const totalFormatted = String(totalSlides).padStart(2, '0');
+        const dots = [];
+
+        // Build dynamic dots navigation
+        if (dotsContainer) {
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+                dot.className = i === 0 
+                    ? 'hero-dot is-active w-6 sm:w-7 h-1.5 rounded-full bg-amber-400 transition-all duration-300 cursor-pointer'
+                    : 'hero-dot w-2 h-1.5 rounded-full bg-white/40 hover:bg-white/75 transition-all duration-200 cursor-pointer';
+                dot.addEventListener('click', () => {
+                    if (window.heroSwiperInstance) {
+                        window.heroSwiperInstance.slideToLoop(i);
+                    }
+                });
+                dotsContainer.appendChild(dot);
+                dots.push(dot);
+            }
+        }
+
+        function updateChrome(realIndex) {
+            const currentFormatted = String(realIndex + 1).padStart(2, '0');
+            if (counterEl) {
+                counterEl.textContent = `${currentFormatted} / ${totalFormatted}`;
+            }
+            if (previewEl && slideElements[realIndex]) {
+                const title = slideElements[realIndex].getAttribute('data-slide-title') || '';
+                previewEl.textContent = title;
+            }
+            dots.forEach((d, idx) => {
+                if (idx === realIndex) {
+                    d.className = 'hero-dot is-active w-6 sm:w-7 h-1.5 rounded-full bg-amber-400 transition-all duration-300 cursor-pointer';
+                    d.setAttribute('aria-current', 'true');
+                } else {
+                    d.className = 'hero-dot w-2 h-1.5 rounded-full bg-white/40 hover:bg-white/75 transition-all duration-200 cursor-pointer';
+                    d.removeAttribute('aria-current');
+                }
+            });
+        }
+
         const swiper = new Swiper('.heroSwiper', {
             loop: true,
+            speed: 900,
             autoplay: {
-                delay: 6000,
+                delay: 6500,
                 disableOnInteraction: false,
             },
             effect: 'fade',
             fadeEffect: {
                 crossFade: true
             },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
+            on: {
+                init: function() {
+                    updateChrome(0);
+                },
+                slideChange: function() {
+                    updateChrome(this.realIndex);
+                }
+            }
         });
+
+        window.heroSwiperInstance = swiper;
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => swiper.slidePrev());
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => swiper.slideNext());
+        }
+
+        let isPlaying = true;
+        if (pauseBtn && pauseIcon) {
+            pauseBtn.addEventListener('click', () => {
+                if (isPlaying) {
+                    swiper.autoplay.stop();
+                    isPlaying = false;
+                    pauseIcon.classList.remove('fa-pause');
+                    pauseIcon.classList.add('fa-play');
+                    pauseBtn.setAttribute('aria-label', 'Resume slideshow');
+                } else {
+                    swiper.autoplay.start();
+                    isPlaying = true;
+                    pauseIcon.classList.remove('fa-play');
+                    pauseIcon.classList.add('fa-pause');
+                    pauseBtn.setAttribute('aria-label', 'Pause slideshow');
+                }
+            });
+        }
     });
 </script>
 {% endblock %}
