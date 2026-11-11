@@ -86,6 +86,26 @@ class SiteSetting(models.Model):
         setting, created = cls.objects.get_or_create(pk=1)
         return setting
 
+    @property
+    def get_vc_image_url(self):
+        if self.vc_image and hasattr(self.vc_image, 'url'):
+            try:
+                if self.vc_image.storage.exists(self.vc_image.name):
+                    return self.vc_image.url
+            except Exception:
+                pass
+        return "/static/images/leadership/vc.jpg"
+
+    @property
+    def get_director_image_url(self):
+        if self.director_image and hasattr(self.director_image, 'url'):
+            try:
+                if self.director_image.storage.exists(self.director_image.name):
+                    return self.director_image.url
+            except Exception:
+                pass
+        return "/static/images/leadership/director.jpg"
+
 
 class HeroSlide(models.Model):
     """Banners displayed on the homepage slider."""
@@ -112,11 +132,23 @@ class HeroSlide(models.Model):
 
     @property
     def get_image_url(self):
+        # 1. If uploaded image file physically exists on disk, use it
         if self.image and hasattr(self.image, 'url'):
-            return self.image.url
+            try:
+                if self.image.storage.exists(self.image.name):
+                    return self.image.url
+            except Exception:
+                pass
+        # 2. Check explicit fallback URL
         if self.image_url_fallback:
             return self.image_url_fallback
-        return "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80"
+        # 3. Check matching file in static/images/
+        if self.image and self.image.name:
+            from django.conf import settings
+            static_file = settings.BASE_DIR / 'static' / 'images' / self.image.name
+            if static_file.exists():
+                return f"/static/images/{self.image.name}"
+        return "/static/images/banners/banner_1.jpg"
 
 
 class Program(models.Model):
@@ -184,10 +216,14 @@ class Program(models.Model):
     @property
     def get_image(self):
         if self.featured_image and hasattr(self.featured_image, 'url'):
-            return self.featured_image.url
+            try:
+                if self.featured_image.storage.exists(self.featured_image.name):
+                    return self.featured_image.url
+            except Exception:
+                pass
         if self.featured_image_url:
             return self.featured_image_url
-        return "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80"
+        return "/static/images/banners/banner_1.jpg"
 
 
 class Course(models.Model):
@@ -228,10 +264,14 @@ class Course(models.Model):
     @property
     def get_thumbnail(self):
         if self.thumbnail and hasattr(self.thumbnail, 'url'):
-            return self.thumbnail.url
+            try:
+                if self.thumbnail.storage.exists(self.thumbnail.name):
+                    return self.thumbnail.url
+            except Exception:
+                pass
         if self.thumbnail_url:
             return self.thumbnail_url
-        return "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=600&q=80"
+        return "/static/images/banners/banner_cbt_1.jpg"
 
 
 class AdmissionBatch(models.Model):
@@ -321,10 +361,19 @@ class StaffMember(models.Model):
     @property
     def get_photo(self):
         if self.photo and hasattr(self.photo, 'url'):
-            return self.photo.url
+            try:
+                if self.photo.storage.exists(self.photo.name):
+                    return self.photo.url
+            except Exception:
+                pass
         if self.photo_url:
             return self.photo_url
-        return "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"
+        if self.photo and self.photo.name:
+            from django.conf import settings
+            static_file = settings.BASE_DIR / 'static' / 'images' / self.photo.name
+            if static_file.exists():
+                return f"/static/images/{self.photo.name}"
+        return "/static/images/staff/dama_williams_yohanna.jpg"
 
 
 class NewsEvent(models.Model):
@@ -367,10 +416,14 @@ class NewsEvent(models.Model):
     @property
     def get_image(self):
         if self.featured_image and hasattr(self.featured_image, 'url'):
-            return self.featured_image.url
+            try:
+                if self.featured_image.storage.exists(self.featured_image.name):
+                    return self.featured_image.url
+            except Exception:
+                pass
         if self.featured_image_url:
             return self.featured_image_url
-        return "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80"
+        return "/static/images/banners/banner_2.jpg"
 
 
 class FAQ(models.Model):

@@ -47,7 +47,8 @@
                 <!-- Background Image with Ken Burns smooth zoom -->
                 <img src="{{ slide.get_image_url }}" alt="{{ slide.title }}"
                     class="hero-slide-img absolute inset-0 w-full h-full object-cover object-top sm:object-center"
-                    loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+                    loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                    onerror="this.onerror=null; this.src='/static/images/banners/banner_1.jpg';">
 
                 <!-- NSUK Dual-Layer Gradient Overlay -->
                 <div class="absolute inset-0 nsuk-hero-gradient pointer-events-none z-[1]"></div>
@@ -105,7 +106,8 @@
             <!-- Default Fallback Slide -->
             <div class="swiper-slide relative flex flex-col justify-between overflow-hidden"
                 data-slide-title="Flexible Higher Education for Tomorrow's Leaders">
-                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1600&q=80"
+                <img src="/static/images/banners/banner_1.jpg"
+                    alt="NSUK ODeL Flagship"
                     class="hero-slide-img absolute inset-0 w-full h-full object-cover">
                 <div class="absolute inset-0 nsuk-hero-gradient pointer-events-none z-[1]"></div>
                 <div
